@@ -4,8 +4,8 @@
 
 int factorial(int n) {
     int t1;
-    int t3;
     int t2;
+    int t3;
     int t0;
 
     t0 = n <= 1;
@@ -21,9 +21,9 @@ endif2: ;
 
 int bda(void) {
     int result;
-    int t2;
-    int t1;
     int t0;
+    int t1;
+    int t2;
 
     t0 = factorial(5);
     result = t0;
