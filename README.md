@@ -22,14 +22,14 @@ The DarijaLang compiler translates source code into C, which is then compiled to
 ### Key Features
 
 - **Culturally-relevant keywords**: Control structures and concepts use Darija-based terminology
-    - Example: `ila` (if), `awla` (else), `7awl` (try), `chd` (catch)
+    - Example: `ila` (if), `awla` (else), `mnintchouf` (while), `koulla` (for), `7awl` (try), `chd` (catch)
 - **C-like core syntax**: Familiar programming paradigm with enhanced readability
 - **Strong type system**: Static typing with clear type declarations
-    - Example: `nemra x = 5;` (int x = 5;)
+    - Supported types: `int`, `float`, `string`, `bool`, and others
 - **Rich control flow**: If/else statements, loops, and functions
 - **Error handling**: Try-catch-throw mechanism using culturally-relevant keywords (7awl/chd/lou7)
-- **Data structures**: Support for arrays (lists) and dictionaries (ktab)
-- **Object-oriented features**: Classes, inheritance, and access modifiers
+- **Data structures**: Support for arrays and dictionaries
+- **Object-oriented features**: Classes, inheritance, and access modifiers (m3rof/mkhabi)
 
 ### Example: Hello World in DarijaLang
 
@@ -418,4 +418,5 @@ precedence = (
         ("left", "TIMES", "DIVIDE"),   # Multiplication and division (*, /)
         ("right", "UMINUS"),           # Unary minus (-x)
         ("right", "MACHI"),            # Logical NOT (!)
+```
 
