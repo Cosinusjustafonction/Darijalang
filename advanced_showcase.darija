@@ -1,0 +1,28 @@
+// Advanced showcase with more complex features
+
+// Helper function to demonstrate function calls
+int add(int a, int b) {
+    rj3 a + b;
+}
+
+int bda() {
+    // Basic features - already tested and working
+    int num = 5;
+    int result = 0;
+    tba3_str("--- DarijaLang Advanced Showcase ---");
+    
+    // Function call with arguments
+    tba3_str("Testing function call:");
+    result = add(3, 4);
+    tba3_str("3 + 4 =");
+    tba3(result);
+    
+    // Logical operators
+    tba3_str("Testing logical operators:");
+    ila (num > 3 && result == 7) {
+        tba3_str("Both conditions are true");
+    }
+    
+    tba3_str("Program completed successfully!");
+    rj3 0;
+}

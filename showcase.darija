@@ -1,0 +1,47 @@
+// DarijaLang Feature Showcase - Simplified version
+
+// Main function with core functionality
+int bda() {
+    // Variable declarations and assignments
+    int num = 5;
+    int result = 0;
+    
+    // Print header
+    tba3_str("--- DarijaLang Feature Showcase ---");
+    
+    // Conditional statements
+    ila (num > 3) {
+        tba3_str("num is greater than 3");
+    } awla {
+        tba3_str("num is not greater than 3");
+    }
+    
+    // Loop example
+    tba3_str("Counting from 1 to 5:");
+    int i = 1;
+    mnintchouf (i <= 5) {
+        tba3(i);
+        i = i + 1;
+    }
+    
+    // Try-catch error handling
+    tba3_str("Error handling demonstration:");
+    7awl {
+        tba3_str("Inside try block");
+        
+        // Simple division that might throw
+        ila (num == 0) {
+            lou7 "Cannot divide by zero";
+        }
+        
+        result = 10 / num;
+        tba3_str("Division result:");
+        tba3(result);
+    } chd (3ajib err) {
+        tba3_str("Caught exception:");
+        tba3_str(err);
+    }
+    
+    tba3_str("Program completed successfully!");
+    rj3 0;
+}

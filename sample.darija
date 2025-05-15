@@ -1,0 +1,24 @@
+// Sample DarijaLang program demonstrating key features
+
+// Main function only
+int bda() {
+    int num = 5;
+    int result = 0;
+    
+    // Simple expression
+    result = num * 2;
+    
+    // Print the result
+    tba3_str("Result:");
+    tba3(result);
+    
+    // Simple loop
+    tba3_str("Counting:");
+    int i = 1;
+    mnintchouf (i <= 5) {
+        tba3(i);
+        i = i + 1;
+    }
+    
+    rj3 0;
+}

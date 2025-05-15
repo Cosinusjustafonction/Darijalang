@@ -1,0 +1,29 @@
+// Basic DarijaLang showcase with only essential features
+
+int bda() {
+    int num = 5;
+    int result = 0;
+    
+    // Print a message
+    tba3_str("DarijaLang Basic Showcase");
+    
+    // Simple expression
+    result = num * 2;
+    tba3_str("Result of num * 2:");
+    tba3(result);
+    
+    // Conditional statement - simplest form
+    ila (num > 3) {
+        tba3_str("num is greater than 3");
+    }
+    
+    // Simple loop - using while instead of complex for loop
+    tba3_str("Counting from 1 to 3:");
+    int i = 1;
+    mnintchouf (i <= 3) {
+        tba3(i);
+        i = i + 1;
+    }
+    
+    rj3 0;
+}

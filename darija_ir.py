@@ -54,6 +54,17 @@ class IRStore(IRNode):
 class IRReturn(IRNode):
     value_var_or_const: Optional[Any] = None  # Temp/var name (str) or constant value to return
 
+# Add these IR node classes for exception handling
+@dataclass
+class IRTryCatch(IRNode):
+    try_body: List[IRNode]
+    catch_var: str  # Name of the exception variable
+    catch_body: List[IRNode]
+
+@dataclass
+class IRThrow(IRNode):
+    value_var_or_const: Any  # Expression to throw
+
 # Function and Program Structure
 @dataclass
 class IRFuncDef(IRNode):
@@ -107,18 +118,25 @@ class ASTtoIRVisitor:
         # Save and reset state for this function
         outer_ir_stream = self.ir_code_stream
         outer_temp_count = self.temp_var_count
-        # outer_label_count = self.label_count # Labels can be global or per-function. Global for now.
         outer_params = self.current_function_params
         outer_loop_stack = self.loop_stack
 
         self.ir_code_stream = []
-        self.temp_var_count = 0 # Temps are local to a function
-        self.current_function_params = [p[1] for p in node.params] # p is (type, name)
+        self.temp_var_count = 0  # Temps are local to a function
+        
+        # Fix for params being None
+        if node.params is None:
+            self.current_function_params = []
+        else:
+            # Store parameter names correctly
+            self.current_function_params = [p[1] for p in node.params]  # Extract param names
+            
         self.loop_stack = []
 
-        self.visit(node.body) # Populates self.ir_code_stream
+        self.visit(node.body)  # Populates self.ir_code_stream
 
         func_ir_body = self.ir_code_stream
+        func_params = list(self.current_function_params)  # Make a copy to preserve parameter list
         
         # Restore outer state
         self.ir_code_stream = outer_ir_stream
@@ -126,7 +144,7 @@ class ASTtoIRVisitor:
         self.current_function_params = outer_params
         self.loop_stack = outer_loop_stack
         
-        return IRFuncDef(name=node.name, params=self.current_function_params, body=func_ir_body)
+        return IRFuncDef(name=node.name, params=func_params, body=func_ir_body)
 
     def visit_Compound(self, node: ast.Compound) -> None:
         for stmt in node.statements:
@@ -144,6 +162,7 @@ class ASTtoIRVisitor:
         self.ir_code_stream.append(IRStore(target_var=node.identifier, source_var_or_const=value_var_or_const))
 
     def visit_ConstLiteral(self, node: ast.ConstLiteral) -> Any:
+        """Return the literal value directly."""
         return node.value
 
     def visit_Identifier(self, node: ast.Identifier) -> str:
@@ -232,8 +251,11 @@ class ASTtoIRVisitor:
         self.ir_code_stream.append(IRLabel(name=loop_end_label))
         self.loop_stack.pop()
 
-    def visit_FuncCall(self, node: ast.FuncCall) -> str: # Returns temp var name holding the result
-        arg_vars_or_consts = [self.visit(arg) for arg in node.args]
+    def visit_FuncCall(self, node: ast.FuncCall) -> str:
+        """Visit function call node and generate IR instructions."""
+        arg_vars_or_consts = []
+        for arg in node.args:
+            arg_vars_or_consts.append(self.visit(arg))
         
         # Determine if the function call's result is used.
         # For simplicity, always assign to a temp. Can be optimized later.
@@ -259,6 +281,45 @@ class ASTtoIRVisitor:
             raise ValueError("Continue statement outside of loop.")
         continue_label, _ = self.loop_stack[-1]
         self.ir_code_stream.append(IRGoto(label=continue_label))
+
+    def visit_TryStmt(self, node: ast.TryStmt) -> None:
+        # Create labels for try entry, catch handler, and after the whole try-catch
+        try_label = self._new_label("try")
+        catch_label = self._new_label("catch")
+        end_label = self._new_label("try_end")
+        
+        # Save current code stream to restore after processing both bodies
+        outer_ir_stream = self.ir_code_stream
+        
+        # Process try block
+        try_body_stream = []
+        self.ir_code_stream = try_body_stream
+        self.visit(node.body)
+        try_body = self.ir_code_stream
+        
+        # Process catch block
+        catch_body_stream = []
+        self.ir_code_stream = catch_body_stream
+        # For each catch handler (we only support one for now)
+        handler = node.handlers[0]  # Just handle the first one for simplicity
+        catch_var = handler.param_name
+        self.visit(handler.body)
+        catch_body = self.ir_code_stream
+        
+        # Restore outer stream
+        self.ir_code_stream = outer_ir_stream
+        
+        # Emit try-catch block instructions
+        self.ir_code_stream.append(IRTryCatch(
+            try_body=try_body,
+            catch_var=catch_var,
+            catch_body=catch_body
+        ))
+
+    def visit_ThrowStmt(self, node: ast.ThrowStmt) -> None:
+        # Evaluate the expression to throw
+        value_var_or_const = self.visit(node.expression)
+        self.ir_code_stream.append(IRThrow(value_var_or_const=value_var_or_const))
 
 # --- Main function to convert AST to IR ---
 def generate_ir(ast_tree: ast.Program) -> IRProgram:

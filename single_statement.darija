@@ -1,0 +1,6 @@
+// Single statement test
+
+int bda() {
+    tba3(5);
+    rj3 0;
+}

@@ -1,0 +1,79 @@
+// Comprehensive DarijaLang example showing multiple features
+
+// Function to calculate maximum of three numbers
+int max3(int a, int b, int c) {
+    int max_val = a;
+    
+    ila (b > max_val) {
+        max_val = b;
+    }
+    
+    ila (c > max_val) {
+        max_val = c;
+    }
+    
+    rj3 max_val;
+}
+
+// Function that demonstrates nested conditionals
+int grade_score(int score) {
+    ila (score >= 90) {
+        rj3 5; // A grade
+    } awla ila (score >= 80) {
+        rj3 4; // B grade
+    } awla ila (score >= 70) {
+        rj3 3; // C grade
+    } awla ila (score >= 60) {
+        rj3 2; // D grade
+    } awla {
+        rj3 1; // F grade
+    }
+}
+
+// Main function to demonstrate all features
+int bda() {
+    // Variable declarations with initialization
+    int a = 10;
+    int b = 25;
+    int c = 15;
+    int result = 0;
+    
+    // Function call with multiple parameters
+    tba3_str("Finding maximum of 10, 25, and 15:");
+    result = max3(a, b, c);
+    tba3(result);
+    
+    // Complex arithmetic expression
+    int expression_result = (a + b) * c / (a - 5);
+    tba3_str("Result of (a + b) * c / (a - 5):");
+    tba3(expression_result);
+    
+    // Nested conditional demonstration
+    tba3_str("Testing grade function with various scores:");
+    int scores[4];
+    scores[0] = 95;
+    scores[1] = 85;
+    scores[2] = 75; 
+    scores[3] = 50;
+    
+    int i = 0;
+    mnintchouf (i < 4) {
+        int score = scores[i];
+        int grade = grade_score(score);
+        
+        tba3_str("Score:");
+        tba3(score);
+        tba3_str("Grade:");
+        tba3(grade);
+        
+        i = i + 1;
+    }
+    
+    // Chained function calls
+    tba3_str("Testing chained function calls:");
+    result = max3(grade_score(80), grade_score(90), grade_score(70));
+    tba3(result);
+    
+    tba3_str("Comprehensive example completed successfully!");
+    rj3 0;
+}

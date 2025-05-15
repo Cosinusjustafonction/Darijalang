@@ -1,0 +1,6 @@
+// Ultra minimal test with just one print statement
+
+int bda() {
+    tba3_str("Hello from DarijaLang!");
+    rj3 0;
+}

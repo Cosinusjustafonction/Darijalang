@@ -10,6 +10,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <setjmp.h>
+
+/* Define strdup for Windows environments that might not have it */
+#ifdef _MSC_VER
+#define strdup _strdup
+#endif
 
 /**
  * Type definitions and aliases for DarijaLang built-in types
@@ -19,6 +25,17 @@
 typedef int boolDarija;
 #define bssa7 1      /* true */
 #define machibssa7 0  /* false */
+
+/* Exception handling support */
+#define MAX_EXCEPTION_HANDLERS 32
+extern jmp_buf __darija_jmp_buf[MAX_EXCEPTION_HANDLERS];
+extern int __darija_handler_idx;
+extern char* __darija_current_exception;
+
+/* Push/pop exception handlers */
+void __darija_push_handler(int id);
+void __darija_pop_handler();
+void __darija_throw(const char* message);
 
 /* Runtime function declarations */
 

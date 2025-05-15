@@ -1,0 +1,47 @@
+// Example of error handling in DarijaLang using 7awl/chd/lou7
+
+// A function that may throw an exception
+int divide(int a, int b) {
+    ila (b == 0) {
+        // Throw an exception when dividing by zero
+        lou7 "Cannot divide by zero";
+    }
+    rj3 a / b;
+}
+
+// Main function demonstrating try-catch
+int bda() {
+    int result = 0;
+    
+    // Try block with potential error
+    7awl {
+        tba3_str("Attempting to divide 10 by 0...");
+        result = divide(10, 0);
+        tba3_str("This line will not execute");
+    } 
+    // Catch block to handle the exception
+    chd (3ajib err) {
+        tba3_str("Caught exception:");
+        tba3_str(err);
+        result = -1;
+    }
+    
+    tba3_str("After try-catch, result is:");
+    tba3(result);
+    
+    // Try block with no error
+    7awl {
+        tba3_str("Attempting to divide 10 by 2...");
+        result = divide(10, 2);
+        tba3_str("Division successful");
+    } 
+    chd (3ajib err) {
+        // This won't execute since no exception is thrown
+        tba3_str("This should not be printed");
+    }
+    
+    tba3_str("Final result:");
+    tba3(result);
+    
+    rj3 0;
+}

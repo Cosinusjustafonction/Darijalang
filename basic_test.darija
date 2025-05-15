@@ -1,0 +1,29 @@
+// Minimal function test without recursion
+
+// Simple function without conditionals
+int add(int a, int b) {
+    rj3 a + b;
+}
+
+// Simple main function
+int bda() {
+    int x = 5;
+    int y = 10;
+    int result = 0;
+    
+    // Function call
+    result = add(x, y);
+    
+    // Display result
+    tba3_str("Result of addition:");
+    tba3(result);
+    
+    // Simple loop without complex conditions
+    int i = 1;
+    mnintchouf (i <= 3) {
+        tba3(i);
+        i = i + 1;
+    }
+    
+    rj3 0;
+}

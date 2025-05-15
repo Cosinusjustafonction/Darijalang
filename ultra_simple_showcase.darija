@@ -1,0 +1,30 @@
+// Ultra simplified showcase - only basic features
+
+int bda() {
+    // Variable declarations
+    int num = 5;
+    int result = 0;
+    
+    // Simple calculation
+    result = num * 2;
+    
+    // Print results
+    tba3_str("DarijaLang Mini Showcase");
+    tba3_str("Result of calculation:");
+    tba3(result);
+    
+    // Simple conditional
+    ila (num > 3) {
+        tba3_str("num is greater than 3");
+    }
+    
+    // Simple loop
+    tba3_str("Counting:");
+    int i = 1;
+    mnintchouf (i <= 3) {
+        tba3(i);
+        i = i + 1;
+    }
+    
+    rj3 0;
+}

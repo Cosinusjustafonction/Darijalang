@@ -1,0 +1,6 @@
+// Absolutely minimal test
+
+int bda() {
+    tba3_str("Minimal test works!");
+    rj3 0;
+}

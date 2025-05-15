@@ -1,0 +1,34 @@
+// Working showcase with incrementally tested features
+
+int bda() {
+    // 1. Variable declarations and initializations (tested working)
+    int num = 5;
+    int result = 0;
+    
+    // 2. Print statements (tested working)
+    tba3_str("DarijaLang Working Showcase");
+    
+    // 3. Simple arithmetic (tested working)
+    result = num * 2;
+    tba3_str("Result of num * 2:");
+    tba3(result);
+    
+    // 4. Conditional statement (if-else)
+    tba3_str("Testing conditional:");
+    ila (num > 3) {
+        tba3_str("num is greater than 3");
+    } awla {
+        tba3_str("num is not greater than 3");
+    }
+    
+    // 5. While loop
+    tba3_str("Testing while loop:");
+    int i = 1;
+    mnintchouf (i <= 3) {
+        tba3(i);
+        i = i + 1;
+    }
+    
+    tba3_str("All basic features working!");
+    rj3 0;
+}

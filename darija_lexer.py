@@ -39,8 +39,17 @@ tokens = (
     # Control flow & other specific Keywords
     'ILA', 'AWLA', 'MNINTCHOUF', 'KOULLA', 'HRASS', 'KML', 'RJ3',
 
+    # OOP Keywords
+    'CLASS', 'EXTENDS', 'PUBLIC', 'PRIVATE',
+    
+    # Data structure Keywords
+    'DICT', 'KEY',
+
+    # Error handling keywords
+    'TRY', 'CATCH', 'THROW', 'EXCEPTION',
+
     # Symbols / Operators
-    'LPAREN', 'RPAREN', 'LBRACE', 'RBRACE', 'COMMA', 'SEMI',
+    'LPAREN', 'RPAREN', 'LBRACE', 'RBRACE', 'LBRACKET', 'RBRACKET', 'COMMA', 'SEMI', 'DOT', 'COLON',
     'ASSIGN',
     'PLUS', 'MINUS', 'TIMES', 'DIVIDE',
     'UMINUS',  # Token for unary minus precedence
@@ -63,13 +72,25 @@ tokens = (
 )
 
 # Keyword and Symbol Mapping
-_TYPE_KEYWORDS = {"int", "float", "char", "bool", "string", "faragh"}
+_TYPE_KEYWORDS = {"int", "float", "char", "bool", "string", "faragh", "list", "ktab"}
 _CONTROL_KEYWORDS_MAP = {
     "ila": "ILA", "awla": "AWLA", "mnintchouf": "MNINTCHOUF",
     "koulla": "KOULLA", "hrass": "HRASS", "kml": "KML", "rj3": "RJ3",
     # Add logical operator keywords here
     "ou": "OU",          # Keyword for logical AND
     "machi": "MACHI",    # Keyword for logical NOT
+    # OOP keywords
+    "9ism": "CLASS",      # Class definition
+    "kikml": "EXTENDS",   # Inheritance
+    "m3rof": "PUBLIC",    # Public access
+    "mkhabi": "PRIVATE",  # Private access
+    # Data structure keywords
+    "sarout": "KEY",      # Dictionary key
+    # Error handling keywords
+    "7awl": "TRY",        # Try block
+    "chd": "CATCH",       # Catch block
+    "lou7": "THROW",      # Throw statement
+    "3ajib": "EXCEPTION", # Exception
     # Note: AWLA_LOGICAL for '||' is distinct from AWLA for 'else'
 }
 _LITERAL_KEYWORDS_MAP = {
@@ -79,8 +100,15 @@ _LITERAL_KEYWORDS_MAP = {
 }
 _SYMBOLS_MAP = {
     '(': 'LPAREN', ')': 'RPAREN', '{': 'LBRACE', '}': 'RBRACE',
-    ',': 'COMMA', ';': 'SEMI', '=': 'ASSIGN',
+    '[': 'LBRACKET', ']': 'RBRACKET', ',': 'COMMA', ';': 'SEMI',
+    '.': 'DOT', ':': 'COLON', '=': 'ASSIGN',
     '+': 'PLUS', '-': 'MINUS', '*': 'TIMES', '/': 'DIVIDE',
+}
+
+# Add special handling for Arabic-numeral-containing keywords
+_SPECIAL_KEYWORDS = {
+    "7awl": "TRY",       # Try block
+    "3ajib": "EXCEPTION"  # Exception type
 }
 
 # Regex patterns --------------------------------------------------------------
@@ -88,6 +116,7 @@ TAG_RE      = re.compile(r"<[^>]+>")                             # HTML‑style 
 # ESC_STRING  = re.compile(r'"((?:\\.|[^"\\])*)"')               # Old regex, kept for reference
 NUMBER_RE   = re.compile(r"\d+(?:\.\d+)?")
 ID_RE       = re.compile(r"[A-Za-z_][\w]*")
+SPECIAL_ID_RE = re.compile(r"[0-9][A-Za-z_]+")  # For identifiers starting with numbers
 WHITESPACE  = re.compile(r"[ \t\r]+")
 COMMENT_RE  = re.compile(r"//[^\n]*")
 
@@ -241,6 +270,22 @@ def tokenize(code: str) -> Iterator[Token]:
                     )
                     raise SyntaxError(error_message_unterminated)
             continue # Continue to the next tokenization attempt from the main loop
+
+        # Check for special keywords that start with numbers (like 7awl, 3ajib)
+        if char_i.isdigit():
+            m = SPECIAL_ID_RE.match(code, i)
+            if m:
+                lexeme = m.group(0)
+                tok_line = line
+                tok_col = column(i)
+                tok_lexpos = i
+                i = m.end()
+                
+                # Check if it's a special keyword
+                if lexeme in _SPECIAL_KEYWORDS:
+                    yield Token(_SPECIAL_KEYWORDS[lexeme], lexeme, tok_line, tok_col, tok_lexpos)
+                    continue
+                # If not a special keyword, fall through to number handling
 
         # Number literal
         m = NUMBER_RE.match(code, i)

@@ -1,0 +1,33 @@
+// Progressive test of DarijaLang features
+// Start with minimal features and add complexity one by one
+
+int bda() {
+    // 1. Basic variable declaration and print (already works)
+    int x = 10;
+    tba3(x);
+    
+    // 2. Simple expression and calculation
+    int y = 5;
+    int z = x + y;
+    tba3_str("Result of x + y:");
+    tba3(z);
+    
+    // 3. Conditional statement
+    tba3_str("Testing conditional:");
+    ila (z > 10) {
+        tba3_str("z is greater than 10");
+    } awla {
+        tba3_str("z is not greater than 10");
+    }
+    
+    // 4. Loop construct
+    tba3_str("Testing loop:");
+    int i = 1;
+    mnintchouf (i <= 3) {
+        tba3(i);
+        i = i + 1;
+    }
+    
+    // Return statement (already works)
+    rj3 0;
+}

@@ -12,7 +12,7 @@ from typing import List, Dict, Set, Optional
 
 from darija_ir import (
     IRProgram, IRFuncDef, IRNode, IRLabel, IRGoto, IRConditionalGoto,
-    IRBinOp, IRUnaryOp, IRCall, IRStore, IRReturn
+    IRBinOp, IRUnaryOp, IRCall, IRStore, IRReturn, IRTryCatch, IRThrow
 )
 
 class CEmitter:
@@ -46,11 +46,19 @@ class CEmitter:
             
         # Add main function stub if not defined
         if not any(f.name == "main" for f in ir_program.functions):
-            # Get the first function or a default function name
-            entry_func = ir_program.functions[0].name if ir_program.functions else "bda"
+            # Look for bda function (our conventional entry point)
+            entry_func = next((f.name for f in ir_program.functions if f.name == "bda"), 
+                             ir_program.functions[0].name if ir_program.functions else "bda")
+            
+            # Determine if the entry function needs parameters
+            entry_params_str = ""
+            for func in ir_program.functions:
+                if func.name == entry_func and func.params:
+                    entry_params_str = ", ".join(["5"] * len(func.params))  # Default args
+            
             result.append(f"\n/* Main stub for program entry */\n")
             result.append(f"int main(void) {{\n")
-            result.append(f"    return {self.safe_identifier(entry_func)}();\n")
+            result.append(f"    return {self.safe_identifier(entry_func)}({entry_params_str});\n")
             result.append("}\n")
             
         return "".join(result)
@@ -63,9 +71,10 @@ class CEmitter:
         
         # Format parameters
         params = []
-        for param in func.params:
-            safe_param = self.safe_identifier(param)
-            params.append(f"int {safe_param}")
+        if func.params:  # Make sure params exists and isn't None
+            for param in func.params:
+                safe_param = self.safe_identifier(param)
+                params.append(f"int {safe_param}")
         params_str = ", ".join(params) if params else "void"
         
         result = [f"int {func_name}({params_str}) {{\n"]
@@ -91,51 +100,67 @@ class CEmitter:
         """Collect all variables used in a function."""
         all_vars = set()
         
-        # Process each instruction to find variables
-        for instr in func.body:
-            # For binary operations, the target is a temp variable
+        # Helper function to process instruction and collect variables
+        def process_instruction(instr):
             if isinstance(instr, IRBinOp):
                 all_vars.add(instr.target_temp_var)
-                if isinstance(instr.left_operand, str):
+                if isinstance(instr.left_operand, str) and instr.left_operand.isidentifier():
                     all_vars.add(instr.left_operand)
-                if isinstance(instr.right_operand, str):
+                if isinstance(instr.right_operand, str) and instr.right_operand.isidentifier():
                     all_vars.add(instr.right_operand)
                     
-            # For unary operations, the target is a temp variable
             elif isinstance(instr, IRUnaryOp):
                 all_vars.add(instr.target_temp_var)
-                if isinstance(instr.operand, str):
+                if isinstance(instr.operand, str) and instr.operand.isidentifier():
                     all_vars.add(instr.operand)
                     
-            # For function calls with return value
             elif isinstance(instr, IRCall):
                 if instr.target_temp_var:
                     all_vars.add(instr.target_temp_var)
                 for arg in instr.args:
-                    if isinstance(arg, str):
+                    if isinstance(arg, str) and arg.isidentifier():
                         all_vars.add(arg)
                         
-            # For assignments
             elif isinstance(instr, IRStore):
                 all_vars.add(instr.target_var)
-                if isinstance(instr.source_var_or_const, str):
+                if isinstance(instr.source_var_or_const, str) and instr.source_var_or_const.isidentifier():
                     all_vars.add(instr.source_var_or_const)
                     
-            # For conditional jumps
             elif isinstance(instr, IRConditionalGoto):
-                if isinstance(instr.condition_var, str):
+                if isinstance(instr.condition_var, str) and instr.condition_var.isidentifier():
                     all_vars.add(instr.condition_var)
                     
-            # For returns
             elif isinstance(instr, IRReturn):
-                if isinstance(instr.value_var_or_const, str):
+                if isinstance(instr.value_var_or_const, str) and instr.value_var_or_const.isidentifier():
+                    all_vars.add(instr.value_var_or_const)
+                    
+            # Handle try-catch blocks recursively
+            elif isinstance(instr, IRTryCatch):
+                # Process try body
+                for try_instr in instr.try_body:
+                    process_instruction(try_instr)
+                    
+                # Add catch variable
+                all_vars.add(instr.catch_var)
+                    
+                # Process catch body
+                for catch_instr in instr.catch_body:
+                    process_instruction(catch_instr)
+                    
+            elif isinstance(instr, IRThrow):
+                if isinstance(instr.value_var_or_const, str) and instr.value_var_or_const.isidentifier():
                     all_vars.add(instr.value_var_or_const)
         
+        # Process each instruction in the function body
+        for instr in func.body:
+            process_instruction(instr)
+        
         # Remove parameter names since they're already declared
-        for param in func.params:
-            if param in all_vars:
-                all_vars.remove(param)
-                
+        if func.params:
+            for param in func.params:
+                if param in all_vars:
+                    all_vars.remove(param)
+                    
         return all_vars
     
     def _emit_instruction(self, instr: IRNode) -> str:
@@ -185,21 +210,73 @@ class CEmitter:
                 return "    return 0;\n"
             value = self._format_operand(instr.value_var_or_const)
             return f"    return {value};\n"
+        elif isinstance(instr, IRTryCatch):
+            # Generate C code for try-catch using setjmp/longjmp
+            try_id = self._new_jmp_id()
+            result = []
+            
+            # Setup try block with setjmp
+            result.append(f"    /* Begin try-catch block {try_id} */\n")
+            result.append(f"    __darija_push_handler({try_id});\n")
+            result.append(f"    if (setjmp(__darija_jmp_buf[__darija_handler_idx - 1]) == 0) {{\n")
+            
+            # Emit try body
+            for try_instr in instr.try_body:
+                # Indent one level more
+                try_code = self._emit_instruction(try_instr).replace("\n", "\n    ")
+                result.append(try_code)
+            
+            # After try body completes normally, skip the catch
+            result.append(f"        /* Try completed normally - pop handler and skip catch */\n")
+            result.append(f"        __darija_pop_handler();\n")
+            result.append(f"    }} else {{\n")
+            result.append(f"        /* Exception caught - execute catch block */\n")
+            
+            # Store exception in catch variable
+            catch_var = self.safe_identifier(instr.catch_var)
+            result.append(f"        char* {catch_var} = __darija_current_exception;\n")
+            
+            # Emit catch body
+            for catch_instr in instr.catch_body:
+                catch_code = self._emit_instruction(catch_instr).replace("\n", "\n        ")
+                result.append(catch_code)
+                
+            result.append(f"    }}\n")
+            result.append(f"    /* End try-catch block {try_id} */\n")
+            return "".join(result)
+        elif isinstance(instr, IRThrow):
+            value = self._format_operand(instr.value_var_or_const)
+            return f"    __darija_throw({value});\n"
         else:
             return f"    /* Unhandled IR instruction: {type(instr).__name__} */\n"
     
+    def _new_jmp_id(self):
+        """Generate a new unique ID for jump buffers."""
+        if not hasattr(self, '_jmp_counter'):
+            self._jmp_counter = 0
+        self._jmp_counter += 1
+        return self._jmp_counter - 1
+
     def _format_operand(self, operand) -> str:
         """Format an operand (variable, literal, etc.) for C code."""
-        if isinstance(operand, str):  # Variable name
+        if isinstance(operand, str):
+            # If it's definitely a string literal (not an identifier), ensure it's quoted
+            if not operand.isidentifier() and not operand.startswith('"'):
+                # Don't double-quote strings that are already quoted
+                return f'"{operand}"'
+            # For variable names or already quoted strings, return as is
             return self.safe_identifier(operand)
-        elif operand is True:
-            return "1"  # C doesn't have 'true' in C89/C90
-        elif operand is False:
-            return "0"  # C doesn't have 'false' in C89/C90
-        elif operand is None:
-            return "0"  # Represent null as 0 for simplicity
-        else:  # Numeric or other literal
+        elif isinstance(operand, (int, float)):
             return str(operand)
+        elif operand is True:
+            return "1"
+        elif operand is False:
+            return "0"
+        elif operand is None:
+            return "0"
+        else:
+            # For any other type, convert to string and handle with care
+            return f'"{str(operand)}"'
 
 def compile_and_run(source: str, keep_c: bool = False, output_path: Optional[str] = None) -> int:
     """
@@ -225,6 +302,22 @@ def compile_and_run(source: str, keep_c: bool = False, output_path: Optional[str
     # Generate C code
     emitter = CEmitter()
     c_code = emitter.emit(ir)
+    
+    # Always save debug output during development
+    debug_c_path = "debug_output.c"
+    with open(debug_c_path, "w") as f:
+        f.write(c_code)
+    print(f"Generated C code saved to: {debug_c_path}")
+    
+    # Include more verbose debug info
+    print("\nAST structure:")
+    print(ast)
+    
+    print("\nIR structure:")
+    for func in ir.functions:
+        print(f"Function: {func.name}")
+        for i, instr in enumerate(func.body):
+            print(f"  [{i}] {type(instr).__name__}: {instr}")
     
     # Create temporary directory for build artifacts
     with tempfile.TemporaryDirectory() as temp_dir:
@@ -305,3 +398,6 @@ if __name__ == "__main__":
     except FileNotFoundError:
         print(f"File not found: {source_path}")
         sys.exit(1)
+
+
+

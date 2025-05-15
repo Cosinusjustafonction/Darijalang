@@ -1,0 +1,50 @@
+// Simplified version of the complex example
+
+// Simple factorial function - no else clause
+int factorial(int n) {
+    ila (n <= 1) {
+        rj3 1;
+    }
+    rj3 n * factorial(n - 1);
+}
+
+// Simple divide function - no exception handling yet
+int divide(int a, int b) {
+    ila (b == 0) {
+        rj3 -1;  // Return -1 instead of throwing exception
+    }
+    rj3 a / b;
+}
+
+// Main function with simplified structure
+int bda() {
+    int num = 5;
+    int result = 0;
+    
+    tba3_str("--- Simplified Complex Example ---");
+    
+    // Test factorial calculation
+    result = factorial(5);
+    tba3_str("Factorial of 5:");
+    tba3(result);
+    
+    // Simple conditional
+    ila (num > 3) {
+        tba3_str("num is greater than 3");
+    }
+    
+    // Test division
+    result = divide(10, 2);
+    tba3_str("10 / 2 =");
+    tba3(result);
+    
+    // Simple loop
+    int i = 1;
+    mnintchouf (i <= 3) {
+        tba3(i);
+        i = i + 1;
+    }
+    
+    tba3_str("Program completed successfully!");
+    rj3 0;
+}

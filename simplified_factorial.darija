@@ -1,0 +1,22 @@
+// Simplified test focusing on factorial function
+
+// Simple factorial function definition
+int factorial(int n) {
+    ila (n <= 1) {
+        rj3 1;
+    }
+    // No 'awla' clause to simplify parsing
+    rj3 n * factorial(n - 1);
+}
+
+// Basic main function
+int bda() {
+    int result;
+    
+    // Call factorial and print result
+    result = factorial(5);
+    tba3_str("Factorial of 5:");
+    tba3(result);
+    
+    rj3 0;
+}

@@ -1,0 +1,11 @@
+// A single variable declaration and print statement
+
+int bda() {
+    int x = 5;
+    
+    mnintchouf(x < 10){
+        tba3("salam");
+        x+=1;
+    }
+    rj3 0;
+}

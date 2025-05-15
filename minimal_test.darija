@@ -1,0 +1,7 @@
+// Minimal test to verify basic functionality
+
+int bda() {
+    int x = 5;
+    tba3(x);
+    rj3 0;
+}

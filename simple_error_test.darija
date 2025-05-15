@@ -1,0 +1,17 @@
+// Simple error handling test
+
+int bda() {
+    int x = 5;
+    
+    // Basic try-catch 
+    7awl {
+        tba3_str("In try block");
+    } chd (3ajib e) {
+        tba3_str("Caught error");
+    }
+    
+    // Simple throw statement
+    lou7 "Test error";
+    
+    rj3 0;
+}

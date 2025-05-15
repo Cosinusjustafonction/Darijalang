@@ -1,0 +1,81 @@
+// Complex DarijaLang program demonstrating advanced features
+
+// Function to calculate factorial recursively
+int factorial(int n) {
+    ila (n <= 1) {
+        rj3 1;
+    } awla {
+        rj3 n * factorial(n - 1);
+    }
+}
+
+// Function that might throw an exception
+int divide(int a, int b) {
+    ila (b == 0) {
+        lou7 "Cannot divide by zero";
+    }
+    rj3 a / b;
+}
+
+// Main function that demonstrates multiple features
+int bda() {
+    // Variable declarations
+    int num = 5;
+    int result = 0;
+    int i = 0;
+    
+    tba3_str("--- Complex DarijaLang Example ---");
+    
+    // Factorial calculation with recursion
+    tba3_str("Calculating factorial of 5:");
+    result = factorial(5);
+    tba3(result);
+    
+    // Nested conditionals and complex expressions
+    tba3_str("Testing complex conditions:");
+    ila (num > 3 && result > 100) {
+        tba3_str("Both conditions are true");
+    } awla {
+        ila (num > 3) {
+            tba3_str("Only first condition is true");
+        } awla {
+            tba3_str("First condition is false");
+        }
+    }
+    
+    // Error handling with try-catch
+    tba3_str("Testing error handling:");
+    
+    // First try-catch: division by 5 (success case)
+    7awl {
+        tba3_str("Dividing 10 by 5:");
+        result = divide(10, 5);
+        tba3(result);
+    } chd (3ajib err) {
+        tba3_str("This shouldn't execute");
+    }
+    
+    // Second try-catch: division by 0 (error case)
+    7awl {
+        tba3_str("Dividing 10 by 0:");
+        result = divide(10, 0);
+        tba3_str("This line won't execute");
+    } chd (3ajib err) {
+        tba3_str("Caught exception:");
+        tba3_str(err);
+    }
+    
+    // Loop with complex condition
+    tba3_str("Loop with complex exit condition:");
+    i = 1;
+    mnintchouf (i <= 5 && result != 3) {
+        tba3(i);
+        ila (i == 3) {
+            result = 3;  // This will cause the loop to exit when i=3
+        }
+        i = i + 1;
+    }
+    
+    tba3_str("Program completed successfully!");
+    rj3 0;
+}
