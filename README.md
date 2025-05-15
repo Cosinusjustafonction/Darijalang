@@ -41,7 +41,7 @@ tba3("Salam Darija!");
 
 ```
 int x = 10;
-kelma name = "Ahmed";
+string name = "Ahmed";
 
 ila (x > 5) {
         tba3("X kbir men 5: " + x);
@@ -155,13 +155,13 @@ The lexer defines several mappings and patterns to recognize different types of 
      ```
 
 2. **Keyword Maps**:
-     - `_TYPE_KEYWORDS`: Type keywords like "int" (int), "3ayan" (float), "kelma" (string)
+     - `_TYPE_KEYWORDS`: Type keywords like "int" (int), "3ayan" (float), "string" (string)
      
      ```python
      _TYPE_KEYWORDS = {
              'int': 'int',      # Integer type
              '3ayan': 'float',    # Float type
-             'kelma': 'string',   # String type
+             'string': 'string',   # String type
              'logic': 'bool',     # Boolean type
              # ... other types ...
      }
