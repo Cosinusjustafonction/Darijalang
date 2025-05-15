@@ -1,4 +1,4 @@
-# This is a project for the Language Theory class Professor Youness Moukafih
+# This is a project for the Language Theory class taught by Professor Youness Moukafih
 # DarijaLang: A Comprehensive Guide
 
 DarijaLang is a compiled programming language with syntax inspired by Darija, the Arabic dialect spoken in Morocco. It combines traditional programming constructs with culturally-relevant keywords to create a unique language that serves both as an educational tool and a practical programming language.
