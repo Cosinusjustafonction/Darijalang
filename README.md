@@ -34,19 +34,19 @@ The DarijaLang compiler translates source code into C, which is then compiled to
 ### Example: Hello World in DarijaLang
 
 ```
-kteb("Salam Darija!");
+tba3("Salam Darija!");
 ```
 
 ### Example: Variable Declaration and Control Flow
 
 ```
-nemra x = 10;
+int x = 10;
 kelma name = "Ahmed";
 
 ila (x > 5) {
-        kteb("X kbir men 5: " + x);
+        tba3("X kbir men 5: " + x);
 } awla {
-        kteb("X sghir men wla equal l 5: " + x);
+        tba3("X sghir men wla equal l 5: " + x);
 }
 ```
 
@@ -66,17 +66,17 @@ This design separates concerns and makes the compiler more maintainable and exte
 
 1. **Lexical Analysis (Lexer)**: This first phase breaks down the source code into a series of tokens. Tokens represent the smallest meaningful units in a programming language, like keywords, identifiers, operators, and literals.
 
-     **Example:** The code `nemra x = 5;` would be tokenized as:
+     **Example:** The code `int x = 5;` would be tokenized as:
      ```
-     [TOKEN(TYPE, "nemra"), TOKEN(ID, "x"), TOKEN(ASSIGN, "="), TOKEN(NUMBER, 5), TOKEN(SEMICOLON, ";")]
+     [TOKEN(TYPE, "int"), TOKEN(ID, "x"), TOKEN(ASSIGN, "="), TOKEN(NUMBER, 5), TOKEN(SEMICOLON, ";")]
      ```
 
 2. **Syntax Analysis (Parser)**: This phase takes the token stream and organizes it into a hierarchical structure called an Abstract Syntax Tree (AST). The AST represents the grammatical structure of the program.
 
-     **Example AST** for `nemra x = 5;`:
+     **Example AST** for `int x = 5;`:
      ```
      VarDecl(
-         type_name="nemra",
+         type_name="int",
          identifier="x",
          initializer=NumberLiteral(value=5),
          line=1
@@ -85,7 +85,7 @@ This design separates concerns and makes the compiler more maintainable and exte
 
 3. **Intermediate Representation (IR)**: The AST is transformed into a lower-level representation that's closer to the target language. This simplifies code generation and enables optimization.
 
-     **Example IR** for `nemra x = 5;`:
+     **Example IR** for `int x = 5;`:
      ```
      IRVarDecl(name="x", type="int")
      IRAssign(target="x", value=5)
@@ -155,11 +155,11 @@ The lexer defines several mappings and patterns to recognize different types of 
      ```
 
 2. **Keyword Maps**:
-     - `_TYPE_KEYWORDS`: Type keywords like "nemra" (int), "3ayan" (float), "kelma" (string)
+     - `_TYPE_KEYWORDS`: Type keywords like "int" (int), "3ayan" (float), "kelma" (string)
      
      ```python
      _TYPE_KEYWORDS = {
-             'nemra': 'int',      # Integer type
+             'int': 'int',      # Integer type
              '3ayan': 'float',    # Float type
              'kelma': 'string',   # String type
              'logic': 'bool',     # Boolean type
@@ -291,16 +291,16 @@ def tokenize(code: str) -> List[Token]:
 For the following DarijaLang code:
 
 ```
-nemra x = 5;
+int x = 5;
 ila (x > 3) {
-        kteb("x kbir men 3");
+        tba3("x kbir men 3");
 }
 ```
 
 The tokenization would produce:
 
 ```
-[Token(TYPE, "nemra", line=1, col=1),
+[Token(TYPE, "int", line=1, col=1),
  Token(ID, "x", line=1, col=7),
  Token(ASSIGN, "=", line=1, col=9),
  Token(NUMBER, 5, line=1, col=11),
@@ -312,7 +312,7 @@ The tokenization would produce:
  Token(NUMBER, 3, line=2, col=10),
  Token(RPAREN, ")", line=2, col=11),
  Token(LBRACE, "{", line=2, col=13),
- Token(ID, "kteb", line=3, col=5),
+ Token(ID, "tba3", line=3, col=5),
  Token(LPAREN, "(", line=3, col=10),
  Token(STRING, "x kbir men 3", line=3, col=11),
  Token(RPAREN, ")", line=3, col=25),
