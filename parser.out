@@ -1,0 +1,3612 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    ILA_IFX
+    UMINUS
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> external_list
+Rule 2     external_list -> external external_list
+Rule 3     external_list -> empty
+Rule 4     external -> function_def
+Rule 5     external -> statement
+Rule 6     function_def -> TYPE ID LPAREN param_list RPAREN compound
+Rule 7     param_list -> param_list_nonempty
+Rule 8     param_list -> empty
+Rule 9     param_list_nonempty -> TYPE ID
+Rule 10    param_list_nonempty -> TYPE ID COMMA param_list_nonempty
+Rule 11    compound -> LBRACE stmt_list RBRACE
+Rule 12    stmt_list -> stmt_list statement
+Rule 13    stmt_list -> empty
+Rule 14    statement -> declaration_stmt
+Rule 15    statement -> expression_stmt
+Rule 16    statement -> if_stmt
+Rule 17    statement -> while_stmt
+Rule 18    statement -> for_stmt
+Rule 19    statement -> return_stmt
+Rule 20    statement -> break_stmt
+Rule 21    statement -> continue_stmt
+Rule 22    statement -> compound
+Rule 23    declaration_stmt -> TYPE ID SEMI
+Rule 24    declaration_stmt -> TYPE ID ASSIGN expression SEMI
+Rule 25    expression_stmt -> expression SEMI
+Rule 26    expression -> assignment
+Rule 27    expression -> binary_expr
+Rule 28    assignment -> ID ASSIGN expression
+Rule 29    binary_expr -> binary_expr PLUS binary_expr
+Rule 30    binary_expr -> binary_expr MINUS binary_expr
+Rule 31    binary_expr -> binary_expr TIMES binary_expr
+Rule 32    binary_expr -> binary_expr DIVIDE binary_expr
+Rule 33    binary_expr -> binary_expr OU binary_expr
+Rule 34    binary_expr -> binary_expr AWLA_LOGICAL binary_expr
+Rule 35    binary_expr -> binary_expr LT binary_expr
+Rule 36    binary_expr -> binary_expr LE binary_expr
+Rule 37    binary_expr -> binary_expr GT binary_expr
+Rule 38    binary_expr -> binary_expr GE binary_expr
+Rule 39    binary_expr -> binary_expr EQ binary_expr
+Rule 40    binary_expr -> binary_expr NE binary_expr
+Rule 41    binary_expr -> MINUS binary_expr
+Rule 42    binary_expr -> MACHI binary_expr
+Rule 43    binary_expr -> LPAREN expression RPAREN
+Rule 44    binary_expr -> NUMBER
+Rule 45    binary_expr -> STRING
+Rule 46    binary_expr -> BOOL
+Rule 47    binary_expr -> NULL
+Rule 48    binary_expr -> ID
+Rule 49    binary_expr -> func_call
+Rule 50    func_call -> ID LPAREN arg_list RPAREN
+Rule 51    arg_list -> arg_list_nonempty
+Rule 52    arg_list -> empty
+Rule 53    arg_list_nonempty -> expression
+Rule 54    arg_list_nonempty -> expression COMMA arg_list_nonempty
+Rule 55    if_stmt -> ILA LPAREN expression RPAREN statement AWLA statement
+Rule 56    if_stmt -> ILA LPAREN expression RPAREN statement
+Rule 57    while_stmt -> MNINTCHOUF LPAREN expression RPAREN statement
+Rule 58    for_stmt -> KOULLA LPAREN opt_expr SEMI opt_expr SEMI opt_expr RPAREN statement
+Rule 59    opt_expr -> expression
+Rule 60    opt_expr -> empty
+Rule 61    break_stmt -> HRASS SEMI
+Rule 62    continue_stmt -> KML SEMI
+Rule 63    return_stmt -> RJ3 opt_expr SEMI
+Rule 64    empty -> <empty>
+
+Terminals, with rules where they appear
+
+ASSIGN               : 24 28
+AWLA                 : 55
+AWLA_LOGICAL         : 34
+BOOL                 : 46
+COMMA                : 10 54
+DIVIDE               : 32
+EQ                   : 39
+GE                   : 38
+GT                   : 37
+HRASS                : 61
+ID                   : 6 9 10 23 24 28 48 50
+ILA                  : 55 56
+ILA_IFX              : 
+KML                  : 62
+KOULLA               : 58
+LBRACE               : 11
+LE                   : 36
+LPAREN               : 6 43 50 55 56 57 58
+LT                   : 35
+MACHI                : 42
+MINUS                : 30 41
+MNINTCHOUF           : 57
+NE                   : 40
+NULL                 : 47
+NUMBER               : 44
+OU                   : 33
+PLUS                 : 29
+RBRACE               : 11
+RJ3                  : 63
+RPAREN               : 6 43 50 55 56 57 58
+SEMI                 : 23 24 25 58 58 61 62 63
+STRING               : 45
+TIMES                : 31
+TYPE                 : 6 9 10 23 24
+UMINUS               : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+arg_list             : 50
+arg_list_nonempty    : 51 54
+assignment           : 26
+binary_expr          : 27 29 29 30 30 31 31 32 32 33 33 34 34 35 35 36 36 37 37 38 38 39 39 40 40 41 42
+break_stmt           : 20
+compound             : 6 22
+continue_stmt        : 21
+declaration_stmt     : 14
+empty                : 3 8 13 52 60
+expression           : 24 25 28 43 53 54 55 56 57 59
+expression_stmt      : 15
+external             : 2
+external_list        : 1 2
+for_stmt             : 18
+func_call            : 49
+function_def         : 4
+if_stmt              : 16
+opt_expr             : 58 58 58 63
+param_list           : 6
+param_list_nonempty  : 7 10
+program              : 0
+return_stmt          : 19
+statement            : 5 12 55 55 56 57 58
+stmt_list            : 11 12
+while_stmt           : 17
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . external_list
+    (2) external_list -> . external external_list
+    (3) external_list -> . empty
+    (4) external -> . function_def
+    (5) external -> . statement
+    (64) empty -> .
+    (6) function_def -> . TYPE ID LPAREN param_list RPAREN compound
+    (14) statement -> . declaration_stmt
+    (15) statement -> . expression_stmt
+    (16) statement -> . if_stmt
+    (17) statement -> . while_stmt
+    (18) statement -> . for_stmt
+    (19) statement -> . return_stmt
+    (20) statement -> . break_stmt
+    (21) statement -> . continue_stmt
+    (22) statement -> . compound
+    (23) declaration_stmt -> . TYPE ID SEMI
+    (24) declaration_stmt -> . TYPE ID ASSIGN expression SEMI
+    (25) expression_stmt -> . expression SEMI
+    (55) if_stmt -> . ILA LPAREN expression RPAREN statement AWLA statement
+    (56) if_stmt -> . ILA LPAREN expression RPAREN statement
+    (57) while_stmt -> . MNINTCHOUF LPAREN expression RPAREN statement
+    (58) for_stmt -> . KOULLA LPAREN opt_expr SEMI opt_expr SEMI opt_expr RPAREN statement
+    (63) return_stmt -> . RJ3 opt_expr SEMI
+    (61) break_stmt -> . HRASS SEMI
+    (62) continue_stmt -> . KML SEMI
+    (11) compound -> . LBRACE stmt_list RBRACE
+    (26) expression -> . assignment
+    (27) expression -> . binary_expr
+    (28) assignment -> . ID ASSIGN expression
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    $end            reduce using rule 64 (empty -> .)
+    TYPE            shift and go to state 7
+    ILA             shift and go to state 20
+    MNINTCHOUF      shift and go to state 21
+    KOULLA          shift and go to state 22
+    RJ3             shift and go to state 23
+    HRASS           shift and go to state 24
+    KML             shift and go to state 25
+    LBRACE          shift and go to state 26
+    ID              shift and go to state 8
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+
+    program                        shift and go to state 1
+    external_list                  shift and go to state 2
+    external                       shift and go to state 3
+    empty                          shift and go to state 4
+    function_def                   shift and go to state 5
+    statement                      shift and go to state 6
+    compound                       shift and go to state 10
+    declaration_stmt               shift and go to state 11
+    expression_stmt                shift and go to state 12
+    if_stmt                        shift and go to state 13
+    while_stmt                     shift and go to state 14
+    for_stmt                       shift and go to state 15
+    return_stmt                    shift and go to state 16
+    break_stmt                     shift and go to state 17
+    continue_stmt                  shift and go to state 18
+    expression                     shift and go to state 19
+    assignment                     shift and go to state 27
+    binary_expr                    shift and go to state 28
+    func_call                      shift and go to state 35
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> external_list .
+
+    $end            reduce using rule 1 (program -> external_list .)
+
+
+state 3
+
+    (2) external_list -> external . external_list
+    (2) external_list -> . external external_list
+    (3) external_list -> . empty
+    (4) external -> . function_def
+    (5) external -> . statement
+    (64) empty -> .
+    (6) function_def -> . TYPE ID LPAREN param_list RPAREN compound
+    (14) statement -> . declaration_stmt
+    (15) statement -> . expression_stmt
+    (16) statement -> . if_stmt
+    (17) statement -> . while_stmt
+    (18) statement -> . for_stmt
+    (19) statement -> . return_stmt
+    (20) statement -> . break_stmt
+    (21) statement -> . continue_stmt
+    (22) statement -> . compound
+    (23) declaration_stmt -> . TYPE ID SEMI
+    (24) declaration_stmt -> . TYPE ID ASSIGN expression SEMI
+    (25) expression_stmt -> . expression SEMI
+    (55) if_stmt -> . ILA LPAREN expression RPAREN statement AWLA statement
+    (56) if_stmt -> . ILA LPAREN expression RPAREN statement
+    (57) while_stmt -> . MNINTCHOUF LPAREN expression RPAREN statement
+    (58) for_stmt -> . KOULLA LPAREN opt_expr SEMI opt_expr SEMI opt_expr RPAREN statement
+    (63) return_stmt -> . RJ3 opt_expr SEMI
+    (61) break_stmt -> . HRASS SEMI
+    (62) continue_stmt -> . KML SEMI
+    (11) compound -> . LBRACE stmt_list RBRACE
+    (26) expression -> . assignment
+    (27) expression -> . binary_expr
+    (28) assignment -> . ID ASSIGN expression
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    $end            reduce using rule 64 (empty -> .)
+    TYPE            shift and go to state 7
+    ILA             shift and go to state 20
+    MNINTCHOUF      shift and go to state 21
+    KOULLA          shift and go to state 22
+    RJ3             shift and go to state 23
+    HRASS           shift and go to state 24
+    KML             shift and go to state 25
+    LBRACE          shift and go to state 26
+    ID              shift and go to state 8
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+
+    external                       shift and go to state 3
+    external_list                  shift and go to state 36
+    empty                          shift and go to state 4
+    function_def                   shift and go to state 5
+    statement                      shift and go to state 6
+    compound                       shift and go to state 10
+    declaration_stmt               shift and go to state 11
+    expression_stmt                shift and go to state 12
+    if_stmt                        shift and go to state 13
+    while_stmt                     shift and go to state 14
+    for_stmt                       shift and go to state 15
+    return_stmt                    shift and go to state 16
+    break_stmt                     shift and go to state 17
+    continue_stmt                  shift and go to state 18
+    expression                     shift and go to state 19
+    assignment                     shift and go to state 27
+    binary_expr                    shift and go to state 28
+    func_call                      shift and go to state 35
+
+state 4
+
+    (3) external_list -> empty .
+
+    $end            reduce using rule 3 (external_list -> empty .)
+
+
+state 5
+
+    (4) external -> function_def .
+
+    TYPE            reduce using rule 4 (external -> function_def .)
+    ILA             reduce using rule 4 (external -> function_def .)
+    MNINTCHOUF      reduce using rule 4 (external -> function_def .)
+    KOULLA          reduce using rule 4 (external -> function_def .)
+    RJ3             reduce using rule 4 (external -> function_def .)
+    HRASS           reduce using rule 4 (external -> function_def .)
+    KML             reduce using rule 4 (external -> function_def .)
+    LBRACE          reduce using rule 4 (external -> function_def .)
+    ID              reduce using rule 4 (external -> function_def .)
+    MINUS           reduce using rule 4 (external -> function_def .)
+    MACHI           reduce using rule 4 (external -> function_def .)
+    LPAREN          reduce using rule 4 (external -> function_def .)
+    NUMBER          reduce using rule 4 (external -> function_def .)
+    STRING          reduce using rule 4 (external -> function_def .)
+    BOOL            reduce using rule 4 (external -> function_def .)
+    NULL            reduce using rule 4 (external -> function_def .)
+    $end            reduce using rule 4 (external -> function_def .)
+
+
+state 6
+
+    (5) external -> statement .
+
+    TYPE            reduce using rule 5 (external -> statement .)
+    ILA             reduce using rule 5 (external -> statement .)
+    MNINTCHOUF      reduce using rule 5 (external -> statement .)
+    KOULLA          reduce using rule 5 (external -> statement .)
+    RJ3             reduce using rule 5 (external -> statement .)
+    HRASS           reduce using rule 5 (external -> statement .)
+    KML             reduce using rule 5 (external -> statement .)
+    LBRACE          reduce using rule 5 (external -> statement .)
+    ID              reduce using rule 5 (external -> statement .)
+    MINUS           reduce using rule 5 (external -> statement .)
+    MACHI           reduce using rule 5 (external -> statement .)
+    LPAREN          reduce using rule 5 (external -> statement .)
+    NUMBER          reduce using rule 5 (external -> statement .)
+    STRING          reduce using rule 5 (external -> statement .)
+    BOOL            reduce using rule 5 (external -> statement .)
+    NULL            reduce using rule 5 (external -> statement .)
+    $end            reduce using rule 5 (external -> statement .)
+
+
+state 7
+
+    (6) function_def -> TYPE . ID LPAREN param_list RPAREN compound
+    (23) declaration_stmt -> TYPE . ID SEMI
+    (24) declaration_stmt -> TYPE . ID ASSIGN expression SEMI
+
+    ID              shift and go to state 37
+
+
+state 8
+
+    (28) assignment -> ID . ASSIGN expression
+    (48) binary_expr -> ID .
+    (50) func_call -> ID . LPAREN arg_list RPAREN
+
+    ASSIGN          shift and go to state 38
+    PLUS            reduce using rule 48 (binary_expr -> ID .)
+    MINUS           reduce using rule 48 (binary_expr -> ID .)
+    TIMES           reduce using rule 48 (binary_expr -> ID .)
+    DIVIDE          reduce using rule 48 (binary_expr -> ID .)
+    OU              reduce using rule 48 (binary_expr -> ID .)
+    AWLA_LOGICAL    reduce using rule 48 (binary_expr -> ID .)
+    LT              reduce using rule 48 (binary_expr -> ID .)
+    LE              reduce using rule 48 (binary_expr -> ID .)
+    GT              reduce using rule 48 (binary_expr -> ID .)
+    GE              reduce using rule 48 (binary_expr -> ID .)
+    EQ              reduce using rule 48 (binary_expr -> ID .)
+    NE              reduce using rule 48 (binary_expr -> ID .)
+    SEMI            reduce using rule 48 (binary_expr -> ID .)
+    RPAREN          reduce using rule 48 (binary_expr -> ID .)
+    COMMA           reduce using rule 48 (binary_expr -> ID .)
+    LPAREN          shift and go to state 39
+
+
+state 9
+
+    (43) binary_expr -> LPAREN . expression RPAREN
+    (26) expression -> . assignment
+    (27) expression -> . binary_expr
+    (28) assignment -> . ID ASSIGN expression
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    ID              shift and go to state 8
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+
+    expression                     shift and go to state 40
+    assignment                     shift and go to state 27
+    binary_expr                    shift and go to state 28
+    func_call                      shift and go to state 35
+
+state 10
+
+    (22) statement -> compound .
+
+    TYPE            reduce using rule 22 (statement -> compound .)
+    ILA             reduce using rule 22 (statement -> compound .)
+    MNINTCHOUF      reduce using rule 22 (statement -> compound .)
+    KOULLA          reduce using rule 22 (statement -> compound .)
+    RJ3             reduce using rule 22 (statement -> compound .)
+    HRASS           reduce using rule 22 (statement -> compound .)
+    KML             reduce using rule 22 (statement -> compound .)
+    LBRACE          reduce using rule 22 (statement -> compound .)
+    ID              reduce using rule 22 (statement -> compound .)
+    MINUS           reduce using rule 22 (statement -> compound .)
+    MACHI           reduce using rule 22 (statement -> compound .)
+    LPAREN          reduce using rule 22 (statement -> compound .)
+    NUMBER          reduce using rule 22 (statement -> compound .)
+    STRING          reduce using rule 22 (statement -> compound .)
+    BOOL            reduce using rule 22 (statement -> compound .)
+    NULL            reduce using rule 22 (statement -> compound .)
+    $end            reduce using rule 22 (statement -> compound .)
+    RBRACE          reduce using rule 22 (statement -> compound .)
+    AWLA            reduce using rule 22 (statement -> compound .)
+
+
+state 11
+
+    (14) statement -> declaration_stmt .
+
+    TYPE            reduce using rule 14 (statement -> declaration_stmt .)
+    ILA             reduce using rule 14 (statement -> declaration_stmt .)
+    MNINTCHOUF      reduce using rule 14 (statement -> declaration_stmt .)
+    KOULLA          reduce using rule 14 (statement -> declaration_stmt .)
+    RJ3             reduce using rule 14 (statement -> declaration_stmt .)
+    HRASS           reduce using rule 14 (statement -> declaration_stmt .)
+    KML             reduce using rule 14 (statement -> declaration_stmt .)
+    LBRACE          reduce using rule 14 (statement -> declaration_stmt .)
+    ID              reduce using rule 14 (statement -> declaration_stmt .)
+    MINUS           reduce using rule 14 (statement -> declaration_stmt .)
+    MACHI           reduce using rule 14 (statement -> declaration_stmt .)
+    LPAREN          reduce using rule 14 (statement -> declaration_stmt .)
+    NUMBER          reduce using rule 14 (statement -> declaration_stmt .)
+    STRING          reduce using rule 14 (statement -> declaration_stmt .)
+    BOOL            reduce using rule 14 (statement -> declaration_stmt .)
+    NULL            reduce using rule 14 (statement -> declaration_stmt .)
+    $end            reduce using rule 14 (statement -> declaration_stmt .)
+    RBRACE          reduce using rule 14 (statement -> declaration_stmt .)
+    AWLA            reduce using rule 14 (statement -> declaration_stmt .)
+
+
+state 12
+
+    (15) statement -> expression_stmt .
+
+    TYPE            reduce using rule 15 (statement -> expression_stmt .)
+    ILA             reduce using rule 15 (statement -> expression_stmt .)
+    MNINTCHOUF      reduce using rule 15 (statement -> expression_stmt .)
+    KOULLA          reduce using rule 15 (statement -> expression_stmt .)
+    RJ3             reduce using rule 15 (statement -> expression_stmt .)
+    HRASS           reduce using rule 15 (statement -> expression_stmt .)
+    KML             reduce using rule 15 (statement -> expression_stmt .)
+    LBRACE          reduce using rule 15 (statement -> expression_stmt .)
+    ID              reduce using rule 15 (statement -> expression_stmt .)
+    MINUS           reduce using rule 15 (statement -> expression_stmt .)
+    MACHI           reduce using rule 15 (statement -> expression_stmt .)
+    LPAREN          reduce using rule 15 (statement -> expression_stmt .)
+    NUMBER          reduce using rule 15 (statement -> expression_stmt .)
+    STRING          reduce using rule 15 (statement -> expression_stmt .)
+    BOOL            reduce using rule 15 (statement -> expression_stmt .)
+    NULL            reduce using rule 15 (statement -> expression_stmt .)
+    $end            reduce using rule 15 (statement -> expression_stmt .)
+    RBRACE          reduce using rule 15 (statement -> expression_stmt .)
+    AWLA            reduce using rule 15 (statement -> expression_stmt .)
+
+
+state 13
+
+    (16) statement -> if_stmt .
+
+    TYPE            reduce using rule 16 (statement -> if_stmt .)
+    ILA             reduce using rule 16 (statement -> if_stmt .)
+    MNINTCHOUF      reduce using rule 16 (statement -> if_stmt .)
+    KOULLA          reduce using rule 16 (statement -> if_stmt .)
+    RJ3             reduce using rule 16 (statement -> if_stmt .)
+    HRASS           reduce using rule 16 (statement -> if_stmt .)
+    KML             reduce using rule 16 (statement -> if_stmt .)
+    LBRACE          reduce using rule 16 (statement -> if_stmt .)
+    ID              reduce using rule 16 (statement -> if_stmt .)
+    MINUS           reduce using rule 16 (statement -> if_stmt .)
+    MACHI           reduce using rule 16 (statement -> if_stmt .)
+    LPAREN          reduce using rule 16 (statement -> if_stmt .)
+    NUMBER          reduce using rule 16 (statement -> if_stmt .)
+    STRING          reduce using rule 16 (statement -> if_stmt .)
+    BOOL            reduce using rule 16 (statement -> if_stmt .)
+    NULL            reduce using rule 16 (statement -> if_stmt .)
+    $end            reduce using rule 16 (statement -> if_stmt .)
+    RBRACE          reduce using rule 16 (statement -> if_stmt .)
+    AWLA            reduce using rule 16 (statement -> if_stmt .)
+
+
+state 14
+
+    (17) statement -> while_stmt .
+
+    TYPE            reduce using rule 17 (statement -> while_stmt .)
+    ILA             reduce using rule 17 (statement -> while_stmt .)
+    MNINTCHOUF      reduce using rule 17 (statement -> while_stmt .)
+    KOULLA          reduce using rule 17 (statement -> while_stmt .)
+    RJ3             reduce using rule 17 (statement -> while_stmt .)
+    HRASS           reduce using rule 17 (statement -> while_stmt .)
+    KML             reduce using rule 17 (statement -> while_stmt .)
+    LBRACE          reduce using rule 17 (statement -> while_stmt .)
+    ID              reduce using rule 17 (statement -> while_stmt .)
+    MINUS           reduce using rule 17 (statement -> while_stmt .)
+    MACHI           reduce using rule 17 (statement -> while_stmt .)
+    LPAREN          reduce using rule 17 (statement -> while_stmt .)
+    NUMBER          reduce using rule 17 (statement -> while_stmt .)
+    STRING          reduce using rule 17 (statement -> while_stmt .)
+    BOOL            reduce using rule 17 (statement -> while_stmt .)
+    NULL            reduce using rule 17 (statement -> while_stmt .)
+    $end            reduce using rule 17 (statement -> while_stmt .)
+    RBRACE          reduce using rule 17 (statement -> while_stmt .)
+    AWLA            reduce using rule 17 (statement -> while_stmt .)
+
+
+state 15
+
+    (18) statement -> for_stmt .
+
+    TYPE            reduce using rule 18 (statement -> for_stmt .)
+    ILA             reduce using rule 18 (statement -> for_stmt .)
+    MNINTCHOUF      reduce using rule 18 (statement -> for_stmt .)
+    KOULLA          reduce using rule 18 (statement -> for_stmt .)
+    RJ3             reduce using rule 18 (statement -> for_stmt .)
+    HRASS           reduce using rule 18 (statement -> for_stmt .)
+    KML             reduce using rule 18 (statement -> for_stmt .)
+    LBRACE          reduce using rule 18 (statement -> for_stmt .)
+    ID              reduce using rule 18 (statement -> for_stmt .)
+    MINUS           reduce using rule 18 (statement -> for_stmt .)
+    MACHI           reduce using rule 18 (statement -> for_stmt .)
+    LPAREN          reduce using rule 18 (statement -> for_stmt .)
+    NUMBER          reduce using rule 18 (statement -> for_stmt .)
+    STRING          reduce using rule 18 (statement -> for_stmt .)
+    BOOL            reduce using rule 18 (statement -> for_stmt .)
+    NULL            reduce using rule 18 (statement -> for_stmt .)
+    $end            reduce using rule 18 (statement -> for_stmt .)
+    RBRACE          reduce using rule 18 (statement -> for_stmt .)
+    AWLA            reduce using rule 18 (statement -> for_stmt .)
+
+
+state 16
+
+    (19) statement -> return_stmt .
+
+    TYPE            reduce using rule 19 (statement -> return_stmt .)
+    ILA             reduce using rule 19 (statement -> return_stmt .)
+    MNINTCHOUF      reduce using rule 19 (statement -> return_stmt .)
+    KOULLA          reduce using rule 19 (statement -> return_stmt .)
+    RJ3             reduce using rule 19 (statement -> return_stmt .)
+    HRASS           reduce using rule 19 (statement -> return_stmt .)
+    KML             reduce using rule 19 (statement -> return_stmt .)
+    LBRACE          reduce using rule 19 (statement -> return_stmt .)
+    ID              reduce using rule 19 (statement -> return_stmt .)
+    MINUS           reduce using rule 19 (statement -> return_stmt .)
+    MACHI           reduce using rule 19 (statement -> return_stmt .)
+    LPAREN          reduce using rule 19 (statement -> return_stmt .)
+    NUMBER          reduce using rule 19 (statement -> return_stmt .)
+    STRING          reduce using rule 19 (statement -> return_stmt .)
+    BOOL            reduce using rule 19 (statement -> return_stmt .)
+    NULL            reduce using rule 19 (statement -> return_stmt .)
+    $end            reduce using rule 19 (statement -> return_stmt .)
+    RBRACE          reduce using rule 19 (statement -> return_stmt .)
+    AWLA            reduce using rule 19 (statement -> return_stmt .)
+
+
+state 17
+
+    (20) statement -> break_stmt .
+
+    TYPE            reduce using rule 20 (statement -> break_stmt .)
+    ILA             reduce using rule 20 (statement -> break_stmt .)
+    MNINTCHOUF      reduce using rule 20 (statement -> break_stmt .)
+    KOULLA          reduce using rule 20 (statement -> break_stmt .)
+    RJ3             reduce using rule 20 (statement -> break_stmt .)
+    HRASS           reduce using rule 20 (statement -> break_stmt .)
+    KML             reduce using rule 20 (statement -> break_stmt .)
+    LBRACE          reduce using rule 20 (statement -> break_stmt .)
+    ID              reduce using rule 20 (statement -> break_stmt .)
+    MINUS           reduce using rule 20 (statement -> break_stmt .)
+    MACHI           reduce using rule 20 (statement -> break_stmt .)
+    LPAREN          reduce using rule 20 (statement -> break_stmt .)
+    NUMBER          reduce using rule 20 (statement -> break_stmt .)
+    STRING          reduce using rule 20 (statement -> break_stmt .)
+    BOOL            reduce using rule 20 (statement -> break_stmt .)
+    NULL            reduce using rule 20 (statement -> break_stmt .)
+    $end            reduce using rule 20 (statement -> break_stmt .)
+    RBRACE          reduce using rule 20 (statement -> break_stmt .)
+    AWLA            reduce using rule 20 (statement -> break_stmt .)
+
+
+state 18
+
+    (21) statement -> continue_stmt .
+
+    TYPE            reduce using rule 21 (statement -> continue_stmt .)
+    ILA             reduce using rule 21 (statement -> continue_stmt .)
+    MNINTCHOUF      reduce using rule 21 (statement -> continue_stmt .)
+    KOULLA          reduce using rule 21 (statement -> continue_stmt .)
+    RJ3             reduce using rule 21 (statement -> continue_stmt .)
+    HRASS           reduce using rule 21 (statement -> continue_stmt .)
+    KML             reduce using rule 21 (statement -> continue_stmt .)
+    LBRACE          reduce using rule 21 (statement -> continue_stmt .)
+    ID              reduce using rule 21 (statement -> continue_stmt .)
+    MINUS           reduce using rule 21 (statement -> continue_stmt .)
+    MACHI           reduce using rule 21 (statement -> continue_stmt .)
+    LPAREN          reduce using rule 21 (statement -> continue_stmt .)
+    NUMBER          reduce using rule 21 (statement -> continue_stmt .)
+    STRING          reduce using rule 21 (statement -> continue_stmt .)
+    BOOL            reduce using rule 21 (statement -> continue_stmt .)
+    NULL            reduce using rule 21 (statement -> continue_stmt .)
+    $end            reduce using rule 21 (statement -> continue_stmt .)
+    RBRACE          reduce using rule 21 (statement -> continue_stmt .)
+    AWLA            reduce using rule 21 (statement -> continue_stmt .)
+
+
+state 19
+
+    (25) expression_stmt -> expression . SEMI
+
+    SEMI            shift and go to state 41
+
+
+state 20
+
+    (55) if_stmt -> ILA . LPAREN expression RPAREN statement AWLA statement
+    (56) if_stmt -> ILA . LPAREN expression RPAREN statement
+
+    LPAREN          shift and go to state 42
+
+
+state 21
+
+    (57) while_stmt -> MNINTCHOUF . LPAREN expression RPAREN statement
+
+    LPAREN          shift and go to state 43
+
+
+state 22
+
+    (58) for_stmt -> KOULLA . LPAREN opt_expr SEMI opt_expr SEMI opt_expr RPAREN statement
+
+    LPAREN          shift and go to state 44
+
+
+state 23
+
+    (63) return_stmt -> RJ3 . opt_expr SEMI
+    (59) opt_expr -> . expression
+    (60) opt_expr -> . empty
+    (26) expression -> . assignment
+    (27) expression -> . binary_expr
+    (64) empty -> .
+    (28) assignment -> . ID ASSIGN expression
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    SEMI            reduce using rule 64 (empty -> .)
+    ID              shift and go to state 8
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+
+    opt_expr                       shift and go to state 45
+    expression                     shift and go to state 46
+    empty                          shift and go to state 47
+    assignment                     shift and go to state 27
+    binary_expr                    shift and go to state 28
+    func_call                      shift and go to state 35
+
+state 24
+
+    (61) break_stmt -> HRASS . SEMI
+
+    SEMI            shift and go to state 48
+
+
+state 25
+
+    (62) continue_stmt -> KML . SEMI
+
+    SEMI            shift and go to state 49
+
+
+state 26
+
+    (11) compound -> LBRACE . stmt_list RBRACE
+    (12) stmt_list -> . stmt_list statement
+    (13) stmt_list -> . empty
+    (64) empty -> .
+
+    RBRACE          reduce using rule 64 (empty -> .)
+    TYPE            reduce using rule 64 (empty -> .)
+    ILA             reduce using rule 64 (empty -> .)
+    MNINTCHOUF      reduce using rule 64 (empty -> .)
+    KOULLA          reduce using rule 64 (empty -> .)
+    RJ3             reduce using rule 64 (empty -> .)
+    HRASS           reduce using rule 64 (empty -> .)
+    KML             reduce using rule 64 (empty -> .)
+    LBRACE          reduce using rule 64 (empty -> .)
+    ID              reduce using rule 64 (empty -> .)
+    MINUS           reduce using rule 64 (empty -> .)
+    MACHI           reduce using rule 64 (empty -> .)
+    LPAREN          reduce using rule 64 (empty -> .)
+    NUMBER          reduce using rule 64 (empty -> .)
+    STRING          reduce using rule 64 (empty -> .)
+    BOOL            reduce using rule 64 (empty -> .)
+    NULL            reduce using rule 64 (empty -> .)
+
+    stmt_list                      shift and go to state 50
+    empty                          shift and go to state 51
+
+state 27
+
+    (26) expression -> assignment .
+
+    SEMI            reduce using rule 26 (expression -> assignment .)
+    RPAREN          reduce using rule 26 (expression -> assignment .)
+    COMMA           reduce using rule 26 (expression -> assignment .)
+
+
+state 28
+
+    (27) expression -> binary_expr .
+    (29) binary_expr -> binary_expr . PLUS binary_expr
+    (30) binary_expr -> binary_expr . MINUS binary_expr
+    (31) binary_expr -> binary_expr . TIMES binary_expr
+    (32) binary_expr -> binary_expr . DIVIDE binary_expr
+    (33) binary_expr -> binary_expr . OU binary_expr
+    (34) binary_expr -> binary_expr . AWLA_LOGICAL binary_expr
+    (35) binary_expr -> binary_expr . LT binary_expr
+    (36) binary_expr -> binary_expr . LE binary_expr
+    (37) binary_expr -> binary_expr . GT binary_expr
+    (38) binary_expr -> binary_expr . GE binary_expr
+    (39) binary_expr -> binary_expr . EQ binary_expr
+    (40) binary_expr -> binary_expr . NE binary_expr
+
+    SEMI            reduce using rule 27 (expression -> binary_expr .)
+    RPAREN          reduce using rule 27 (expression -> binary_expr .)
+    COMMA           reduce using rule 27 (expression -> binary_expr .)
+    PLUS            shift and go to state 52
+    MINUS           shift and go to state 53
+    TIMES           shift and go to state 54
+    DIVIDE          shift and go to state 55
+    OU              shift and go to state 56
+    AWLA_LOGICAL    shift and go to state 57
+    LT              shift and go to state 58
+    LE              shift and go to state 59
+    GT              shift and go to state 60
+    GE              shift and go to state 61
+    EQ              shift and go to state 62
+    NE              shift and go to state 63
+
+
+state 29
+
+    (41) binary_expr -> MINUS . binary_expr
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+    ID              shift and go to state 65
+
+    binary_expr                    shift and go to state 64
+    func_call                      shift and go to state 35
+
+state 30
+
+    (42) binary_expr -> MACHI . binary_expr
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+    ID              shift and go to state 65
+
+    binary_expr                    shift and go to state 66
+    func_call                      shift and go to state 35
+
+state 31
+
+    (44) binary_expr -> NUMBER .
+
+    PLUS            reduce using rule 44 (binary_expr -> NUMBER .)
+    MINUS           reduce using rule 44 (binary_expr -> NUMBER .)
+    TIMES           reduce using rule 44 (binary_expr -> NUMBER .)
+    DIVIDE          reduce using rule 44 (binary_expr -> NUMBER .)
+    OU              reduce using rule 44 (binary_expr -> NUMBER .)
+    AWLA_LOGICAL    reduce using rule 44 (binary_expr -> NUMBER .)
+    LT              reduce using rule 44 (binary_expr -> NUMBER .)
+    LE              reduce using rule 44 (binary_expr -> NUMBER .)
+    GT              reduce using rule 44 (binary_expr -> NUMBER .)
+    GE              reduce using rule 44 (binary_expr -> NUMBER .)
+    EQ              reduce using rule 44 (binary_expr -> NUMBER .)
+    NE              reduce using rule 44 (binary_expr -> NUMBER .)
+    SEMI            reduce using rule 44 (binary_expr -> NUMBER .)
+    RPAREN          reduce using rule 44 (binary_expr -> NUMBER .)
+    COMMA           reduce using rule 44 (binary_expr -> NUMBER .)
+
+
+state 32
+
+    (45) binary_expr -> STRING .
+
+    PLUS            reduce using rule 45 (binary_expr -> STRING .)
+    MINUS           reduce using rule 45 (binary_expr -> STRING .)
+    TIMES           reduce using rule 45 (binary_expr -> STRING .)
+    DIVIDE          reduce using rule 45 (binary_expr -> STRING .)
+    OU              reduce using rule 45 (binary_expr -> STRING .)
+    AWLA_LOGICAL    reduce using rule 45 (binary_expr -> STRING .)
+    LT              reduce using rule 45 (binary_expr -> STRING .)
+    LE              reduce using rule 45 (binary_expr -> STRING .)
+    GT              reduce using rule 45 (binary_expr -> STRING .)
+    GE              reduce using rule 45 (binary_expr -> STRING .)
+    EQ              reduce using rule 45 (binary_expr -> STRING .)
+    NE              reduce using rule 45 (binary_expr -> STRING .)
+    SEMI            reduce using rule 45 (binary_expr -> STRING .)
+    RPAREN          reduce using rule 45 (binary_expr -> STRING .)
+    COMMA           reduce using rule 45 (binary_expr -> STRING .)
+
+
+state 33
+
+    (46) binary_expr -> BOOL .
+
+    PLUS            reduce using rule 46 (binary_expr -> BOOL .)
+    MINUS           reduce using rule 46 (binary_expr -> BOOL .)
+    TIMES           reduce using rule 46 (binary_expr -> BOOL .)
+    DIVIDE          reduce using rule 46 (binary_expr -> BOOL .)
+    OU              reduce using rule 46 (binary_expr -> BOOL .)
+    AWLA_LOGICAL    reduce using rule 46 (binary_expr -> BOOL .)
+    LT              reduce using rule 46 (binary_expr -> BOOL .)
+    LE              reduce using rule 46 (binary_expr -> BOOL .)
+    GT              reduce using rule 46 (binary_expr -> BOOL .)
+    GE              reduce using rule 46 (binary_expr -> BOOL .)
+    EQ              reduce using rule 46 (binary_expr -> BOOL .)
+    NE              reduce using rule 46 (binary_expr -> BOOL .)
+    SEMI            reduce using rule 46 (binary_expr -> BOOL .)
+    RPAREN          reduce using rule 46 (binary_expr -> BOOL .)
+    COMMA           reduce using rule 46 (binary_expr -> BOOL .)
+
+
+state 34
+
+    (47) binary_expr -> NULL .
+
+    PLUS            reduce using rule 47 (binary_expr -> NULL .)
+    MINUS           reduce using rule 47 (binary_expr -> NULL .)
+    TIMES           reduce using rule 47 (binary_expr -> NULL .)
+    DIVIDE          reduce using rule 47 (binary_expr -> NULL .)
+    OU              reduce using rule 47 (binary_expr -> NULL .)
+    AWLA_LOGICAL    reduce using rule 47 (binary_expr -> NULL .)
+    LT              reduce using rule 47 (binary_expr -> NULL .)
+    LE              reduce using rule 47 (binary_expr -> NULL .)
+    GT              reduce using rule 47 (binary_expr -> NULL .)
+    GE              reduce using rule 47 (binary_expr -> NULL .)
+    EQ              reduce using rule 47 (binary_expr -> NULL .)
+    NE              reduce using rule 47 (binary_expr -> NULL .)
+    SEMI            reduce using rule 47 (binary_expr -> NULL .)
+    RPAREN          reduce using rule 47 (binary_expr -> NULL .)
+    COMMA           reduce using rule 47 (binary_expr -> NULL .)
+
+
+state 35
+
+    (49) binary_expr -> func_call .
+
+    PLUS            reduce using rule 49 (binary_expr -> func_call .)
+    MINUS           reduce using rule 49 (binary_expr -> func_call .)
+    TIMES           reduce using rule 49 (binary_expr -> func_call .)
+    DIVIDE          reduce using rule 49 (binary_expr -> func_call .)
+    OU              reduce using rule 49 (binary_expr -> func_call .)
+    AWLA_LOGICAL    reduce using rule 49 (binary_expr -> func_call .)
+    LT              reduce using rule 49 (binary_expr -> func_call .)
+    LE              reduce using rule 49 (binary_expr -> func_call .)
+    GT              reduce using rule 49 (binary_expr -> func_call .)
+    GE              reduce using rule 49 (binary_expr -> func_call .)
+    EQ              reduce using rule 49 (binary_expr -> func_call .)
+    NE              reduce using rule 49 (binary_expr -> func_call .)
+    SEMI            reduce using rule 49 (binary_expr -> func_call .)
+    RPAREN          reduce using rule 49 (binary_expr -> func_call .)
+    COMMA           reduce using rule 49 (binary_expr -> func_call .)
+
+
+state 36
+
+    (2) external_list -> external external_list .
+
+    $end            reduce using rule 2 (external_list -> external external_list .)
+
+
+state 37
+
+    (6) function_def -> TYPE ID . LPAREN param_list RPAREN compound
+    (23) declaration_stmt -> TYPE ID . SEMI
+    (24) declaration_stmt -> TYPE ID . ASSIGN expression SEMI
+
+    LPAREN          shift and go to state 67
+    SEMI            shift and go to state 68
+    ASSIGN          shift and go to state 69
+
+
+state 38
+
+    (28) assignment -> ID ASSIGN . expression
+    (26) expression -> . assignment
+    (27) expression -> . binary_expr
+    (28) assignment -> . ID ASSIGN expression
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    ID              shift and go to state 8
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+
+    expression                     shift and go to state 70
+    assignment                     shift and go to state 27
+    binary_expr                    shift and go to state 28
+    func_call                      shift and go to state 35
+
+state 39
+
+    (50) func_call -> ID LPAREN . arg_list RPAREN
+    (51) arg_list -> . arg_list_nonempty
+    (52) arg_list -> . empty
+    (53) arg_list_nonempty -> . expression
+    (54) arg_list_nonempty -> . expression COMMA arg_list_nonempty
+    (64) empty -> .
+    (26) expression -> . assignment
+    (27) expression -> . binary_expr
+    (28) assignment -> . ID ASSIGN expression
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    RPAREN          reduce using rule 64 (empty -> .)
+    ID              shift and go to state 8
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+
+    arg_list                       shift and go to state 71
+    arg_list_nonempty              shift and go to state 72
+    empty                          shift and go to state 73
+    expression                     shift and go to state 74
+    assignment                     shift and go to state 27
+    binary_expr                    shift and go to state 28
+    func_call                      shift and go to state 35
+
+state 40
+
+    (43) binary_expr -> LPAREN expression . RPAREN
+
+    RPAREN          shift and go to state 75
+
+
+state 41
+
+    (25) expression_stmt -> expression SEMI .
+
+    TYPE            reduce using rule 25 (expression_stmt -> expression SEMI .)
+    ILA             reduce using rule 25 (expression_stmt -> expression SEMI .)
+    MNINTCHOUF      reduce using rule 25 (expression_stmt -> expression SEMI .)
+    KOULLA          reduce using rule 25 (expression_stmt -> expression SEMI .)
+    RJ3             reduce using rule 25 (expression_stmt -> expression SEMI .)
+    HRASS           reduce using rule 25 (expression_stmt -> expression SEMI .)
+    KML             reduce using rule 25 (expression_stmt -> expression SEMI .)
+    LBRACE          reduce using rule 25 (expression_stmt -> expression SEMI .)
+    ID              reduce using rule 25 (expression_stmt -> expression SEMI .)
+    MINUS           reduce using rule 25 (expression_stmt -> expression SEMI .)
+    MACHI           reduce using rule 25 (expression_stmt -> expression SEMI .)
+    LPAREN          reduce using rule 25 (expression_stmt -> expression SEMI .)
+    NUMBER          reduce using rule 25 (expression_stmt -> expression SEMI .)
+    STRING          reduce using rule 25 (expression_stmt -> expression SEMI .)
+    BOOL            reduce using rule 25 (expression_stmt -> expression SEMI .)
+    NULL            reduce using rule 25 (expression_stmt -> expression SEMI .)
+    $end            reduce using rule 25 (expression_stmt -> expression SEMI .)
+    RBRACE          reduce using rule 25 (expression_stmt -> expression SEMI .)
+    AWLA            reduce using rule 25 (expression_stmt -> expression SEMI .)
+
+
+state 42
+
+    (55) if_stmt -> ILA LPAREN . expression RPAREN statement AWLA statement
+    (56) if_stmt -> ILA LPAREN . expression RPAREN statement
+    (26) expression -> . assignment
+    (27) expression -> . binary_expr
+    (28) assignment -> . ID ASSIGN expression
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    ID              shift and go to state 8
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+
+    expression                     shift and go to state 76
+    assignment                     shift and go to state 27
+    binary_expr                    shift and go to state 28
+    func_call                      shift and go to state 35
+
+state 43
+
+    (57) while_stmt -> MNINTCHOUF LPAREN . expression RPAREN statement
+    (26) expression -> . assignment
+    (27) expression -> . binary_expr
+    (28) assignment -> . ID ASSIGN expression
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    ID              shift and go to state 8
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+
+    expression                     shift and go to state 77
+    assignment                     shift and go to state 27
+    binary_expr                    shift and go to state 28
+    func_call                      shift and go to state 35
+
+state 44
+
+    (58) for_stmt -> KOULLA LPAREN . opt_expr SEMI opt_expr SEMI opt_expr RPAREN statement
+    (59) opt_expr -> . expression
+    (60) opt_expr -> . empty
+    (26) expression -> . assignment
+    (27) expression -> . binary_expr
+    (64) empty -> .
+    (28) assignment -> . ID ASSIGN expression
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    SEMI            reduce using rule 64 (empty -> .)
+    ID              shift and go to state 8
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+
+    opt_expr                       shift and go to state 78
+    expression                     shift and go to state 46
+    empty                          shift and go to state 47
+    assignment                     shift and go to state 27
+    binary_expr                    shift and go to state 28
+    func_call                      shift and go to state 35
+
+state 45
+
+    (63) return_stmt -> RJ3 opt_expr . SEMI
+
+    SEMI            shift and go to state 79
+
+
+state 46
+
+    (59) opt_expr -> expression .
+
+    SEMI            reduce using rule 59 (opt_expr -> expression .)
+    RPAREN          reduce using rule 59 (opt_expr -> expression .)
+
+
+state 47
+
+    (60) opt_expr -> empty .
+
+    SEMI            reduce using rule 60 (opt_expr -> empty .)
+    RPAREN          reduce using rule 60 (opt_expr -> empty .)
+
+
+state 48
+
+    (61) break_stmt -> HRASS SEMI .
+
+    TYPE            reduce using rule 61 (break_stmt -> HRASS SEMI .)
+    ILA             reduce using rule 61 (break_stmt -> HRASS SEMI .)
+    MNINTCHOUF      reduce using rule 61 (break_stmt -> HRASS SEMI .)
+    KOULLA          reduce using rule 61 (break_stmt -> HRASS SEMI .)
+    RJ3             reduce using rule 61 (break_stmt -> HRASS SEMI .)
+    HRASS           reduce using rule 61 (break_stmt -> HRASS SEMI .)
+    KML             reduce using rule 61 (break_stmt -> HRASS SEMI .)
+    LBRACE          reduce using rule 61 (break_stmt -> HRASS SEMI .)
+    ID              reduce using rule 61 (break_stmt -> HRASS SEMI .)
+    MINUS           reduce using rule 61 (break_stmt -> HRASS SEMI .)
+    MACHI           reduce using rule 61 (break_stmt -> HRASS SEMI .)
+    LPAREN          reduce using rule 61 (break_stmt -> HRASS SEMI .)
+    NUMBER          reduce using rule 61 (break_stmt -> HRASS SEMI .)
+    STRING          reduce using rule 61 (break_stmt -> HRASS SEMI .)
+    BOOL            reduce using rule 61 (break_stmt -> HRASS SEMI .)
+    NULL            reduce using rule 61 (break_stmt -> HRASS SEMI .)
+    $end            reduce using rule 61 (break_stmt -> HRASS SEMI .)
+    RBRACE          reduce using rule 61 (break_stmt -> HRASS SEMI .)
+    AWLA            reduce using rule 61 (break_stmt -> HRASS SEMI .)
+
+
+state 49
+
+    (62) continue_stmt -> KML SEMI .
+
+    TYPE            reduce using rule 62 (continue_stmt -> KML SEMI .)
+    ILA             reduce using rule 62 (continue_stmt -> KML SEMI .)
+    MNINTCHOUF      reduce using rule 62 (continue_stmt -> KML SEMI .)
+    KOULLA          reduce using rule 62 (continue_stmt -> KML SEMI .)
+    RJ3             reduce using rule 62 (continue_stmt -> KML SEMI .)
+    HRASS           reduce using rule 62 (continue_stmt -> KML SEMI .)
+    KML             reduce using rule 62 (continue_stmt -> KML SEMI .)
+    LBRACE          reduce using rule 62 (continue_stmt -> KML SEMI .)
+    ID              reduce using rule 62 (continue_stmt -> KML SEMI .)
+    MINUS           reduce using rule 62 (continue_stmt -> KML SEMI .)
+    MACHI           reduce using rule 62 (continue_stmt -> KML SEMI .)
+    LPAREN          reduce using rule 62 (continue_stmt -> KML SEMI .)
+    NUMBER          reduce using rule 62 (continue_stmt -> KML SEMI .)
+    STRING          reduce using rule 62 (continue_stmt -> KML SEMI .)
+    BOOL            reduce using rule 62 (continue_stmt -> KML SEMI .)
+    NULL            reduce using rule 62 (continue_stmt -> KML SEMI .)
+    $end            reduce using rule 62 (continue_stmt -> KML SEMI .)
+    RBRACE          reduce using rule 62 (continue_stmt -> KML SEMI .)
+    AWLA            reduce using rule 62 (continue_stmt -> KML SEMI .)
+
+
+state 50
+
+    (11) compound -> LBRACE stmt_list . RBRACE
+    (12) stmt_list -> stmt_list . statement
+    (14) statement -> . declaration_stmt
+    (15) statement -> . expression_stmt
+    (16) statement -> . if_stmt
+    (17) statement -> . while_stmt
+    (18) statement -> . for_stmt
+    (19) statement -> . return_stmt
+    (20) statement -> . break_stmt
+    (21) statement -> . continue_stmt
+    (22) statement -> . compound
+    (23) declaration_stmt -> . TYPE ID SEMI
+    (24) declaration_stmt -> . TYPE ID ASSIGN expression SEMI
+    (25) expression_stmt -> . expression SEMI
+    (55) if_stmt -> . ILA LPAREN expression RPAREN statement AWLA statement
+    (56) if_stmt -> . ILA LPAREN expression RPAREN statement
+    (57) while_stmt -> . MNINTCHOUF LPAREN expression RPAREN statement
+    (58) for_stmt -> . KOULLA LPAREN opt_expr SEMI opt_expr SEMI opt_expr RPAREN statement
+    (63) return_stmt -> . RJ3 opt_expr SEMI
+    (61) break_stmt -> . HRASS SEMI
+    (62) continue_stmt -> . KML SEMI
+    (11) compound -> . LBRACE stmt_list RBRACE
+    (26) expression -> . assignment
+    (27) expression -> . binary_expr
+    (28) assignment -> . ID ASSIGN expression
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    RBRACE          shift and go to state 80
+    TYPE            shift and go to state 82
+    ILA             shift and go to state 20
+    MNINTCHOUF      shift and go to state 21
+    KOULLA          shift and go to state 22
+    RJ3             shift and go to state 23
+    HRASS           shift and go to state 24
+    KML             shift and go to state 25
+    LBRACE          shift and go to state 26
+    ID              shift and go to state 8
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+
+    statement                      shift and go to state 81
+    declaration_stmt               shift and go to state 11
+    expression_stmt                shift and go to state 12
+    if_stmt                        shift and go to state 13
+    while_stmt                     shift and go to state 14
+    for_stmt                       shift and go to state 15
+    return_stmt                    shift and go to state 16
+    break_stmt                     shift and go to state 17
+    continue_stmt                  shift and go to state 18
+    compound                       shift and go to state 10
+    expression                     shift and go to state 19
+    assignment                     shift and go to state 27
+    binary_expr                    shift and go to state 28
+    func_call                      shift and go to state 35
+
+state 51
+
+    (13) stmt_list -> empty .
+
+    RBRACE          reduce using rule 13 (stmt_list -> empty .)
+    TYPE            reduce using rule 13 (stmt_list -> empty .)
+    ILA             reduce using rule 13 (stmt_list -> empty .)
+    MNINTCHOUF      reduce using rule 13 (stmt_list -> empty .)
+    KOULLA          reduce using rule 13 (stmt_list -> empty .)
+    RJ3             reduce using rule 13 (stmt_list -> empty .)
+    HRASS           reduce using rule 13 (stmt_list -> empty .)
+    KML             reduce using rule 13 (stmt_list -> empty .)
+    LBRACE          reduce using rule 13 (stmt_list -> empty .)
+    ID              reduce using rule 13 (stmt_list -> empty .)
+    MINUS           reduce using rule 13 (stmt_list -> empty .)
+    MACHI           reduce using rule 13 (stmt_list -> empty .)
+    LPAREN          reduce using rule 13 (stmt_list -> empty .)
+    NUMBER          reduce using rule 13 (stmt_list -> empty .)
+    STRING          reduce using rule 13 (stmt_list -> empty .)
+    BOOL            reduce using rule 13 (stmt_list -> empty .)
+    NULL            reduce using rule 13 (stmt_list -> empty .)
+
+
+state 52
+
+    (29) binary_expr -> binary_expr PLUS . binary_expr
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+    ID              shift and go to state 65
+
+    binary_expr                    shift and go to state 83
+    func_call                      shift and go to state 35
+
+state 53
+
+    (30) binary_expr -> binary_expr MINUS . binary_expr
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+    ID              shift and go to state 65
+
+    binary_expr                    shift and go to state 84
+    func_call                      shift and go to state 35
+
+state 54
+
+    (31) binary_expr -> binary_expr TIMES . binary_expr
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+    ID              shift and go to state 65
+
+    binary_expr                    shift and go to state 85
+    func_call                      shift and go to state 35
+
+state 55
+
+    (32) binary_expr -> binary_expr DIVIDE . binary_expr
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+    ID              shift and go to state 65
+
+    binary_expr                    shift and go to state 86
+    func_call                      shift and go to state 35
+
+state 56
+
+    (33) binary_expr -> binary_expr OU . binary_expr
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+    ID              shift and go to state 65
+
+    binary_expr                    shift and go to state 87
+    func_call                      shift and go to state 35
+
+state 57
+
+    (34) binary_expr -> binary_expr AWLA_LOGICAL . binary_expr
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+    ID              shift and go to state 65
+
+    binary_expr                    shift and go to state 88
+    func_call                      shift and go to state 35
+
+state 58
+
+    (35) binary_expr -> binary_expr LT . binary_expr
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+    ID              shift and go to state 65
+
+    binary_expr                    shift and go to state 89
+    func_call                      shift and go to state 35
+
+state 59
+
+    (36) binary_expr -> binary_expr LE . binary_expr
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+    ID              shift and go to state 65
+
+    binary_expr                    shift and go to state 90
+    func_call                      shift and go to state 35
+
+state 60
+
+    (37) binary_expr -> binary_expr GT . binary_expr
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+    ID              shift and go to state 65
+
+    binary_expr                    shift and go to state 91
+    func_call                      shift and go to state 35
+
+state 61
+
+    (38) binary_expr -> binary_expr GE . binary_expr
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+    ID              shift and go to state 65
+
+    binary_expr                    shift and go to state 92
+    func_call                      shift and go to state 35
+
+state 62
+
+    (39) binary_expr -> binary_expr EQ . binary_expr
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+    ID              shift and go to state 65
+
+    binary_expr                    shift and go to state 93
+    func_call                      shift and go to state 35
+
+state 63
+
+    (40) binary_expr -> binary_expr NE . binary_expr
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+    ID              shift and go to state 65
+
+    binary_expr                    shift and go to state 94
+    func_call                      shift and go to state 35
+
+state 64
+
+    (41) binary_expr -> MINUS binary_expr .
+    (29) binary_expr -> binary_expr . PLUS binary_expr
+    (30) binary_expr -> binary_expr . MINUS binary_expr
+    (31) binary_expr -> binary_expr . TIMES binary_expr
+    (32) binary_expr -> binary_expr . DIVIDE binary_expr
+    (33) binary_expr -> binary_expr . OU binary_expr
+    (34) binary_expr -> binary_expr . AWLA_LOGICAL binary_expr
+    (35) binary_expr -> binary_expr . LT binary_expr
+    (36) binary_expr -> binary_expr . LE binary_expr
+    (37) binary_expr -> binary_expr . GT binary_expr
+    (38) binary_expr -> binary_expr . GE binary_expr
+    (39) binary_expr -> binary_expr . EQ binary_expr
+    (40) binary_expr -> binary_expr . NE binary_expr
+
+    PLUS            reduce using rule 41 (binary_expr -> MINUS binary_expr .)
+    MINUS           reduce using rule 41 (binary_expr -> MINUS binary_expr .)
+    TIMES           reduce using rule 41 (binary_expr -> MINUS binary_expr .)
+    DIVIDE          reduce using rule 41 (binary_expr -> MINUS binary_expr .)
+    OU              reduce using rule 41 (binary_expr -> MINUS binary_expr .)
+    AWLA_LOGICAL    reduce using rule 41 (binary_expr -> MINUS binary_expr .)
+    LT              reduce using rule 41 (binary_expr -> MINUS binary_expr .)
+    LE              reduce using rule 41 (binary_expr -> MINUS binary_expr .)
+    GT              reduce using rule 41 (binary_expr -> MINUS binary_expr .)
+    GE              reduce using rule 41 (binary_expr -> MINUS binary_expr .)
+    EQ              reduce using rule 41 (binary_expr -> MINUS binary_expr .)
+    NE              reduce using rule 41 (binary_expr -> MINUS binary_expr .)
+    SEMI            reduce using rule 41 (binary_expr -> MINUS binary_expr .)
+    RPAREN          reduce using rule 41 (binary_expr -> MINUS binary_expr .)
+    COMMA           reduce using rule 41 (binary_expr -> MINUS binary_expr .)
+
+  ! PLUS            [ shift and go to state 52 ]
+  ! MINUS           [ shift and go to state 53 ]
+  ! TIMES           [ shift and go to state 54 ]
+  ! DIVIDE          [ shift and go to state 55 ]
+  ! OU              [ shift and go to state 56 ]
+  ! AWLA_LOGICAL    [ shift and go to state 57 ]
+  ! LT              [ shift and go to state 58 ]
+  ! LE              [ shift and go to state 59 ]
+  ! GT              [ shift and go to state 60 ]
+  ! GE              [ shift and go to state 61 ]
+  ! EQ              [ shift and go to state 62 ]
+  ! NE              [ shift and go to state 63 ]
+
+
+state 65
+
+    (48) binary_expr -> ID .
+    (50) func_call -> ID . LPAREN arg_list RPAREN
+
+    PLUS            reduce using rule 48 (binary_expr -> ID .)
+    MINUS           reduce using rule 48 (binary_expr -> ID .)
+    TIMES           reduce using rule 48 (binary_expr -> ID .)
+    DIVIDE          reduce using rule 48 (binary_expr -> ID .)
+    OU              reduce using rule 48 (binary_expr -> ID .)
+    AWLA_LOGICAL    reduce using rule 48 (binary_expr -> ID .)
+    LT              reduce using rule 48 (binary_expr -> ID .)
+    LE              reduce using rule 48 (binary_expr -> ID .)
+    GT              reduce using rule 48 (binary_expr -> ID .)
+    GE              reduce using rule 48 (binary_expr -> ID .)
+    EQ              reduce using rule 48 (binary_expr -> ID .)
+    NE              reduce using rule 48 (binary_expr -> ID .)
+    SEMI            reduce using rule 48 (binary_expr -> ID .)
+    RPAREN          reduce using rule 48 (binary_expr -> ID .)
+    COMMA           reduce using rule 48 (binary_expr -> ID .)
+    LPAREN          shift and go to state 39
+
+
+state 66
+
+    (42) binary_expr -> MACHI binary_expr .
+    (29) binary_expr -> binary_expr . PLUS binary_expr
+    (30) binary_expr -> binary_expr . MINUS binary_expr
+    (31) binary_expr -> binary_expr . TIMES binary_expr
+    (32) binary_expr -> binary_expr . DIVIDE binary_expr
+    (33) binary_expr -> binary_expr . OU binary_expr
+    (34) binary_expr -> binary_expr . AWLA_LOGICAL binary_expr
+    (35) binary_expr -> binary_expr . LT binary_expr
+    (36) binary_expr -> binary_expr . LE binary_expr
+    (37) binary_expr -> binary_expr . GT binary_expr
+    (38) binary_expr -> binary_expr . GE binary_expr
+    (39) binary_expr -> binary_expr . EQ binary_expr
+    (40) binary_expr -> binary_expr . NE binary_expr
+
+    PLUS            reduce using rule 42 (binary_expr -> MACHI binary_expr .)
+    MINUS           reduce using rule 42 (binary_expr -> MACHI binary_expr .)
+    TIMES           reduce using rule 42 (binary_expr -> MACHI binary_expr .)
+    DIVIDE          reduce using rule 42 (binary_expr -> MACHI binary_expr .)
+    OU              reduce using rule 42 (binary_expr -> MACHI binary_expr .)
+    AWLA_LOGICAL    reduce using rule 42 (binary_expr -> MACHI binary_expr .)
+    LT              reduce using rule 42 (binary_expr -> MACHI binary_expr .)
+    LE              reduce using rule 42 (binary_expr -> MACHI binary_expr .)
+    GT              reduce using rule 42 (binary_expr -> MACHI binary_expr .)
+    GE              reduce using rule 42 (binary_expr -> MACHI binary_expr .)
+    EQ              reduce using rule 42 (binary_expr -> MACHI binary_expr .)
+    NE              reduce using rule 42 (binary_expr -> MACHI binary_expr .)
+    SEMI            reduce using rule 42 (binary_expr -> MACHI binary_expr .)
+    RPAREN          reduce using rule 42 (binary_expr -> MACHI binary_expr .)
+    COMMA           reduce using rule 42 (binary_expr -> MACHI binary_expr .)
+
+  ! PLUS            [ shift and go to state 52 ]
+  ! MINUS           [ shift and go to state 53 ]
+  ! TIMES           [ shift and go to state 54 ]
+  ! DIVIDE          [ shift and go to state 55 ]
+  ! OU              [ shift and go to state 56 ]
+  ! AWLA_LOGICAL    [ shift and go to state 57 ]
+  ! LT              [ shift and go to state 58 ]
+  ! LE              [ shift and go to state 59 ]
+  ! GT              [ shift and go to state 60 ]
+  ! GE              [ shift and go to state 61 ]
+  ! EQ              [ shift and go to state 62 ]
+  ! NE              [ shift and go to state 63 ]
+
+
+state 67
+
+    (6) function_def -> TYPE ID LPAREN . param_list RPAREN compound
+    (7) param_list -> . param_list_nonempty
+    (8) param_list -> . empty
+    (9) param_list_nonempty -> . TYPE ID
+    (10) param_list_nonempty -> . TYPE ID COMMA param_list_nonempty
+    (64) empty -> .
+
+    TYPE            shift and go to state 95
+    RPAREN          reduce using rule 64 (empty -> .)
+
+    param_list                     shift and go to state 96
+    param_list_nonempty            shift and go to state 97
+    empty                          shift and go to state 98
+
+state 68
+
+    (23) declaration_stmt -> TYPE ID SEMI .
+
+    TYPE            reduce using rule 23 (declaration_stmt -> TYPE ID SEMI .)
+    ILA             reduce using rule 23 (declaration_stmt -> TYPE ID SEMI .)
+    MNINTCHOUF      reduce using rule 23 (declaration_stmt -> TYPE ID SEMI .)
+    KOULLA          reduce using rule 23 (declaration_stmt -> TYPE ID SEMI .)
+    RJ3             reduce using rule 23 (declaration_stmt -> TYPE ID SEMI .)
+    HRASS           reduce using rule 23 (declaration_stmt -> TYPE ID SEMI .)
+    KML             reduce using rule 23 (declaration_stmt -> TYPE ID SEMI .)
+    LBRACE          reduce using rule 23 (declaration_stmt -> TYPE ID SEMI .)
+    ID              reduce using rule 23 (declaration_stmt -> TYPE ID SEMI .)
+    MINUS           reduce using rule 23 (declaration_stmt -> TYPE ID SEMI .)
+    MACHI           reduce using rule 23 (declaration_stmt -> TYPE ID SEMI .)
+    LPAREN          reduce using rule 23 (declaration_stmt -> TYPE ID SEMI .)
+    NUMBER          reduce using rule 23 (declaration_stmt -> TYPE ID SEMI .)
+    STRING          reduce using rule 23 (declaration_stmt -> TYPE ID SEMI .)
+    BOOL            reduce using rule 23 (declaration_stmt -> TYPE ID SEMI .)
+    NULL            reduce using rule 23 (declaration_stmt -> TYPE ID SEMI .)
+    $end            reduce using rule 23 (declaration_stmt -> TYPE ID SEMI .)
+    RBRACE          reduce using rule 23 (declaration_stmt -> TYPE ID SEMI .)
+    AWLA            reduce using rule 23 (declaration_stmt -> TYPE ID SEMI .)
+
+
+state 69
+
+    (24) declaration_stmt -> TYPE ID ASSIGN . expression SEMI
+    (26) expression -> . assignment
+    (27) expression -> . binary_expr
+    (28) assignment -> . ID ASSIGN expression
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    ID              shift and go to state 8
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+
+    expression                     shift and go to state 99
+    assignment                     shift and go to state 27
+    binary_expr                    shift and go to state 28
+    func_call                      shift and go to state 35
+
+state 70
+
+    (28) assignment -> ID ASSIGN expression .
+
+    SEMI            reduce using rule 28 (assignment -> ID ASSIGN expression .)
+    RPAREN          reduce using rule 28 (assignment -> ID ASSIGN expression .)
+    COMMA           reduce using rule 28 (assignment -> ID ASSIGN expression .)
+
+
+state 71
+
+    (50) func_call -> ID LPAREN arg_list . RPAREN
+
+    RPAREN          shift and go to state 100
+
+
+state 72
+
+    (51) arg_list -> arg_list_nonempty .
+
+    RPAREN          reduce using rule 51 (arg_list -> arg_list_nonempty .)
+
+
+state 73
+
+    (52) arg_list -> empty .
+
+    RPAREN          reduce using rule 52 (arg_list -> empty .)
+
+
+state 74
+
+    (53) arg_list_nonempty -> expression .
+    (54) arg_list_nonempty -> expression . COMMA arg_list_nonempty
+
+    RPAREN          reduce using rule 53 (arg_list_nonempty -> expression .)
+    COMMA           shift and go to state 101
+
+
+state 75
+
+    (43) binary_expr -> LPAREN expression RPAREN .
+
+    PLUS            reduce using rule 43 (binary_expr -> LPAREN expression RPAREN .)
+    MINUS           reduce using rule 43 (binary_expr -> LPAREN expression RPAREN .)
+    TIMES           reduce using rule 43 (binary_expr -> LPAREN expression RPAREN .)
+    DIVIDE          reduce using rule 43 (binary_expr -> LPAREN expression RPAREN .)
+    OU              reduce using rule 43 (binary_expr -> LPAREN expression RPAREN .)
+    AWLA_LOGICAL    reduce using rule 43 (binary_expr -> LPAREN expression RPAREN .)
+    LT              reduce using rule 43 (binary_expr -> LPAREN expression RPAREN .)
+    LE              reduce using rule 43 (binary_expr -> LPAREN expression RPAREN .)
+    GT              reduce using rule 43 (binary_expr -> LPAREN expression RPAREN .)
+    GE              reduce using rule 43 (binary_expr -> LPAREN expression RPAREN .)
+    EQ              reduce using rule 43 (binary_expr -> LPAREN expression RPAREN .)
+    NE              reduce using rule 43 (binary_expr -> LPAREN expression RPAREN .)
+    SEMI            reduce using rule 43 (binary_expr -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 43 (binary_expr -> LPAREN expression RPAREN .)
+    COMMA           reduce using rule 43 (binary_expr -> LPAREN expression RPAREN .)
+
+
+state 76
+
+    (55) if_stmt -> ILA LPAREN expression . RPAREN statement AWLA statement
+    (56) if_stmt -> ILA LPAREN expression . RPAREN statement
+
+    RPAREN          shift and go to state 102
+
+
+state 77
+
+    (57) while_stmt -> MNINTCHOUF LPAREN expression . RPAREN statement
+
+    RPAREN          shift and go to state 103
+
+
+state 78
+
+    (58) for_stmt -> KOULLA LPAREN opt_expr . SEMI opt_expr SEMI opt_expr RPAREN statement
+
+    SEMI            shift and go to state 104
+
+
+state 79
+
+    (63) return_stmt -> RJ3 opt_expr SEMI .
+
+    TYPE            reduce using rule 63 (return_stmt -> RJ3 opt_expr SEMI .)
+    ILA             reduce using rule 63 (return_stmt -> RJ3 opt_expr SEMI .)
+    MNINTCHOUF      reduce using rule 63 (return_stmt -> RJ3 opt_expr SEMI .)
+    KOULLA          reduce using rule 63 (return_stmt -> RJ3 opt_expr SEMI .)
+    RJ3             reduce using rule 63 (return_stmt -> RJ3 opt_expr SEMI .)
+    HRASS           reduce using rule 63 (return_stmt -> RJ3 opt_expr SEMI .)
+    KML             reduce using rule 63 (return_stmt -> RJ3 opt_expr SEMI .)
+    LBRACE          reduce using rule 63 (return_stmt -> RJ3 opt_expr SEMI .)
+    ID              reduce using rule 63 (return_stmt -> RJ3 opt_expr SEMI .)
+    MINUS           reduce using rule 63 (return_stmt -> RJ3 opt_expr SEMI .)
+    MACHI           reduce using rule 63 (return_stmt -> RJ3 opt_expr SEMI .)
+    LPAREN          reduce using rule 63 (return_stmt -> RJ3 opt_expr SEMI .)
+    NUMBER          reduce using rule 63 (return_stmt -> RJ3 opt_expr SEMI .)
+    STRING          reduce using rule 63 (return_stmt -> RJ3 opt_expr SEMI .)
+    BOOL            reduce using rule 63 (return_stmt -> RJ3 opt_expr SEMI .)
+    NULL            reduce using rule 63 (return_stmt -> RJ3 opt_expr SEMI .)
+    $end            reduce using rule 63 (return_stmt -> RJ3 opt_expr SEMI .)
+    RBRACE          reduce using rule 63 (return_stmt -> RJ3 opt_expr SEMI .)
+    AWLA            reduce using rule 63 (return_stmt -> RJ3 opt_expr SEMI .)
+
+
+state 80
+
+    (11) compound -> LBRACE stmt_list RBRACE .
+
+    TYPE            reduce using rule 11 (compound -> LBRACE stmt_list RBRACE .)
+    ILA             reduce using rule 11 (compound -> LBRACE stmt_list RBRACE .)
+    MNINTCHOUF      reduce using rule 11 (compound -> LBRACE stmt_list RBRACE .)
+    KOULLA          reduce using rule 11 (compound -> LBRACE stmt_list RBRACE .)
+    RJ3             reduce using rule 11 (compound -> LBRACE stmt_list RBRACE .)
+    HRASS           reduce using rule 11 (compound -> LBRACE stmt_list RBRACE .)
+    KML             reduce using rule 11 (compound -> LBRACE stmt_list RBRACE .)
+    LBRACE          reduce using rule 11 (compound -> LBRACE stmt_list RBRACE .)
+    ID              reduce using rule 11 (compound -> LBRACE stmt_list RBRACE .)
+    MINUS           reduce using rule 11 (compound -> LBRACE stmt_list RBRACE .)
+    MACHI           reduce using rule 11 (compound -> LBRACE stmt_list RBRACE .)
+    LPAREN          reduce using rule 11 (compound -> LBRACE stmt_list RBRACE .)
+    NUMBER          reduce using rule 11 (compound -> LBRACE stmt_list RBRACE .)
+    STRING          reduce using rule 11 (compound -> LBRACE stmt_list RBRACE .)
+    BOOL            reduce using rule 11 (compound -> LBRACE stmt_list RBRACE .)
+    NULL            reduce using rule 11 (compound -> LBRACE stmt_list RBRACE .)
+    $end            reduce using rule 11 (compound -> LBRACE stmt_list RBRACE .)
+    RBRACE          reduce using rule 11 (compound -> LBRACE stmt_list RBRACE .)
+    AWLA            reduce using rule 11 (compound -> LBRACE stmt_list RBRACE .)
+
+
+state 81
+
+    (12) stmt_list -> stmt_list statement .
+
+    RBRACE          reduce using rule 12 (stmt_list -> stmt_list statement .)
+    TYPE            reduce using rule 12 (stmt_list -> stmt_list statement .)
+    ILA             reduce using rule 12 (stmt_list -> stmt_list statement .)
+    MNINTCHOUF      reduce using rule 12 (stmt_list -> stmt_list statement .)
+    KOULLA          reduce using rule 12 (stmt_list -> stmt_list statement .)
+    RJ3             reduce using rule 12 (stmt_list -> stmt_list statement .)
+    HRASS           reduce using rule 12 (stmt_list -> stmt_list statement .)
+    KML             reduce using rule 12 (stmt_list -> stmt_list statement .)
+    LBRACE          reduce using rule 12 (stmt_list -> stmt_list statement .)
+    ID              reduce using rule 12 (stmt_list -> stmt_list statement .)
+    MINUS           reduce using rule 12 (stmt_list -> stmt_list statement .)
+    MACHI           reduce using rule 12 (stmt_list -> stmt_list statement .)
+    LPAREN          reduce using rule 12 (stmt_list -> stmt_list statement .)
+    NUMBER          reduce using rule 12 (stmt_list -> stmt_list statement .)
+    STRING          reduce using rule 12 (stmt_list -> stmt_list statement .)
+    BOOL            reduce using rule 12 (stmt_list -> stmt_list statement .)
+    NULL            reduce using rule 12 (stmt_list -> stmt_list statement .)
+
+
+state 82
+
+    (23) declaration_stmt -> TYPE . ID SEMI
+    (24) declaration_stmt -> TYPE . ID ASSIGN expression SEMI
+
+    ID              shift and go to state 105
+
+
+state 83
+
+    (29) binary_expr -> binary_expr PLUS binary_expr .
+    (29) binary_expr -> binary_expr . PLUS binary_expr
+    (30) binary_expr -> binary_expr . MINUS binary_expr
+    (31) binary_expr -> binary_expr . TIMES binary_expr
+    (32) binary_expr -> binary_expr . DIVIDE binary_expr
+    (33) binary_expr -> binary_expr . OU binary_expr
+    (34) binary_expr -> binary_expr . AWLA_LOGICAL binary_expr
+    (35) binary_expr -> binary_expr . LT binary_expr
+    (36) binary_expr -> binary_expr . LE binary_expr
+    (37) binary_expr -> binary_expr . GT binary_expr
+    (38) binary_expr -> binary_expr . GE binary_expr
+    (39) binary_expr -> binary_expr . EQ binary_expr
+    (40) binary_expr -> binary_expr . NE binary_expr
+
+    PLUS            reduce using rule 29 (binary_expr -> binary_expr PLUS binary_expr .)
+    MINUS           reduce using rule 29 (binary_expr -> binary_expr PLUS binary_expr .)
+    OU              reduce using rule 29 (binary_expr -> binary_expr PLUS binary_expr .)
+    AWLA_LOGICAL    reduce using rule 29 (binary_expr -> binary_expr PLUS binary_expr .)
+    LT              reduce using rule 29 (binary_expr -> binary_expr PLUS binary_expr .)
+    LE              reduce using rule 29 (binary_expr -> binary_expr PLUS binary_expr .)
+    GT              reduce using rule 29 (binary_expr -> binary_expr PLUS binary_expr .)
+    GE              reduce using rule 29 (binary_expr -> binary_expr PLUS binary_expr .)
+    EQ              reduce using rule 29 (binary_expr -> binary_expr PLUS binary_expr .)
+    NE              reduce using rule 29 (binary_expr -> binary_expr PLUS binary_expr .)
+    SEMI            reduce using rule 29 (binary_expr -> binary_expr PLUS binary_expr .)
+    RPAREN          reduce using rule 29 (binary_expr -> binary_expr PLUS binary_expr .)
+    COMMA           reduce using rule 29 (binary_expr -> binary_expr PLUS binary_expr .)
+    TIMES           shift and go to state 54
+    DIVIDE          shift and go to state 55
+
+  ! TIMES           [ reduce using rule 29 (binary_expr -> binary_expr PLUS binary_expr .) ]
+  ! DIVIDE          [ reduce using rule 29 (binary_expr -> binary_expr PLUS binary_expr .) ]
+  ! PLUS            [ shift and go to state 52 ]
+  ! MINUS           [ shift and go to state 53 ]
+  ! OU              [ shift and go to state 56 ]
+  ! AWLA_LOGICAL    [ shift and go to state 57 ]
+  ! LT              [ shift and go to state 58 ]
+  ! LE              [ shift and go to state 59 ]
+  ! GT              [ shift and go to state 60 ]
+  ! GE              [ shift and go to state 61 ]
+  ! EQ              [ shift and go to state 62 ]
+  ! NE              [ shift and go to state 63 ]
+
+
+state 84
+
+    (30) binary_expr -> binary_expr MINUS binary_expr .
+    (29) binary_expr -> binary_expr . PLUS binary_expr
+    (30) binary_expr -> binary_expr . MINUS binary_expr
+    (31) binary_expr -> binary_expr . TIMES binary_expr
+    (32) binary_expr -> binary_expr . DIVIDE binary_expr
+    (33) binary_expr -> binary_expr . OU binary_expr
+    (34) binary_expr -> binary_expr . AWLA_LOGICAL binary_expr
+    (35) binary_expr -> binary_expr . LT binary_expr
+    (36) binary_expr -> binary_expr . LE binary_expr
+    (37) binary_expr -> binary_expr . GT binary_expr
+    (38) binary_expr -> binary_expr . GE binary_expr
+    (39) binary_expr -> binary_expr . EQ binary_expr
+    (40) binary_expr -> binary_expr . NE binary_expr
+
+    PLUS            reduce using rule 30 (binary_expr -> binary_expr MINUS binary_expr .)
+    MINUS           reduce using rule 30 (binary_expr -> binary_expr MINUS binary_expr .)
+    OU              reduce using rule 30 (binary_expr -> binary_expr MINUS binary_expr .)
+    AWLA_LOGICAL    reduce using rule 30 (binary_expr -> binary_expr MINUS binary_expr .)
+    LT              reduce using rule 30 (binary_expr -> binary_expr MINUS binary_expr .)
+    LE              reduce using rule 30 (binary_expr -> binary_expr MINUS binary_expr .)
+    GT              reduce using rule 30 (binary_expr -> binary_expr MINUS binary_expr .)
+    GE              reduce using rule 30 (binary_expr -> binary_expr MINUS binary_expr .)
+    EQ              reduce using rule 30 (binary_expr -> binary_expr MINUS binary_expr .)
+    NE              reduce using rule 30 (binary_expr -> binary_expr MINUS binary_expr .)
+    SEMI            reduce using rule 30 (binary_expr -> binary_expr MINUS binary_expr .)
+    RPAREN          reduce using rule 30 (binary_expr -> binary_expr MINUS binary_expr .)
+    COMMA           reduce using rule 30 (binary_expr -> binary_expr MINUS binary_expr .)
+    TIMES           shift and go to state 54
+    DIVIDE          shift and go to state 55
+
+  ! TIMES           [ reduce using rule 30 (binary_expr -> binary_expr MINUS binary_expr .) ]
+  ! DIVIDE          [ reduce using rule 30 (binary_expr -> binary_expr MINUS binary_expr .) ]
+  ! PLUS            [ shift and go to state 52 ]
+  ! MINUS           [ shift and go to state 53 ]
+  ! OU              [ shift and go to state 56 ]
+  ! AWLA_LOGICAL    [ shift and go to state 57 ]
+  ! LT              [ shift and go to state 58 ]
+  ! LE              [ shift and go to state 59 ]
+  ! GT              [ shift and go to state 60 ]
+  ! GE              [ shift and go to state 61 ]
+  ! EQ              [ shift and go to state 62 ]
+  ! NE              [ shift and go to state 63 ]
+
+
+state 85
+
+    (31) binary_expr -> binary_expr TIMES binary_expr .
+    (29) binary_expr -> binary_expr . PLUS binary_expr
+    (30) binary_expr -> binary_expr . MINUS binary_expr
+    (31) binary_expr -> binary_expr . TIMES binary_expr
+    (32) binary_expr -> binary_expr . DIVIDE binary_expr
+    (33) binary_expr -> binary_expr . OU binary_expr
+    (34) binary_expr -> binary_expr . AWLA_LOGICAL binary_expr
+    (35) binary_expr -> binary_expr . LT binary_expr
+    (36) binary_expr -> binary_expr . LE binary_expr
+    (37) binary_expr -> binary_expr . GT binary_expr
+    (38) binary_expr -> binary_expr . GE binary_expr
+    (39) binary_expr -> binary_expr . EQ binary_expr
+    (40) binary_expr -> binary_expr . NE binary_expr
+
+    PLUS            reduce using rule 31 (binary_expr -> binary_expr TIMES binary_expr .)
+    MINUS           reduce using rule 31 (binary_expr -> binary_expr TIMES binary_expr .)
+    TIMES           reduce using rule 31 (binary_expr -> binary_expr TIMES binary_expr .)
+    DIVIDE          reduce using rule 31 (binary_expr -> binary_expr TIMES binary_expr .)
+    OU              reduce using rule 31 (binary_expr -> binary_expr TIMES binary_expr .)
+    AWLA_LOGICAL    reduce using rule 31 (binary_expr -> binary_expr TIMES binary_expr .)
+    LT              reduce using rule 31 (binary_expr -> binary_expr TIMES binary_expr .)
+    LE              reduce using rule 31 (binary_expr -> binary_expr TIMES binary_expr .)
+    GT              reduce using rule 31 (binary_expr -> binary_expr TIMES binary_expr .)
+    GE              reduce using rule 31 (binary_expr -> binary_expr TIMES binary_expr .)
+    EQ              reduce using rule 31 (binary_expr -> binary_expr TIMES binary_expr .)
+    NE              reduce using rule 31 (binary_expr -> binary_expr TIMES binary_expr .)
+    SEMI            reduce using rule 31 (binary_expr -> binary_expr TIMES binary_expr .)
+    RPAREN          reduce using rule 31 (binary_expr -> binary_expr TIMES binary_expr .)
+    COMMA           reduce using rule 31 (binary_expr -> binary_expr TIMES binary_expr .)
+
+  ! PLUS            [ shift and go to state 52 ]
+  ! MINUS           [ shift and go to state 53 ]
+  ! TIMES           [ shift and go to state 54 ]
+  ! DIVIDE          [ shift and go to state 55 ]
+  ! OU              [ shift and go to state 56 ]
+  ! AWLA_LOGICAL    [ shift and go to state 57 ]
+  ! LT              [ shift and go to state 58 ]
+  ! LE              [ shift and go to state 59 ]
+  ! GT              [ shift and go to state 60 ]
+  ! GE              [ shift and go to state 61 ]
+  ! EQ              [ shift and go to state 62 ]
+  ! NE              [ shift and go to state 63 ]
+
+
+state 86
+
+    (32) binary_expr -> binary_expr DIVIDE binary_expr .
+    (29) binary_expr -> binary_expr . PLUS binary_expr
+    (30) binary_expr -> binary_expr . MINUS binary_expr
+    (31) binary_expr -> binary_expr . TIMES binary_expr
+    (32) binary_expr -> binary_expr . DIVIDE binary_expr
+    (33) binary_expr -> binary_expr . OU binary_expr
+    (34) binary_expr -> binary_expr . AWLA_LOGICAL binary_expr
+    (35) binary_expr -> binary_expr . LT binary_expr
+    (36) binary_expr -> binary_expr . LE binary_expr
+    (37) binary_expr -> binary_expr . GT binary_expr
+    (38) binary_expr -> binary_expr . GE binary_expr
+    (39) binary_expr -> binary_expr . EQ binary_expr
+    (40) binary_expr -> binary_expr . NE binary_expr
+
+    PLUS            reduce using rule 32 (binary_expr -> binary_expr DIVIDE binary_expr .)
+    MINUS           reduce using rule 32 (binary_expr -> binary_expr DIVIDE binary_expr .)
+    TIMES           reduce using rule 32 (binary_expr -> binary_expr DIVIDE binary_expr .)
+    DIVIDE          reduce using rule 32 (binary_expr -> binary_expr DIVIDE binary_expr .)
+    OU              reduce using rule 32 (binary_expr -> binary_expr DIVIDE binary_expr .)
+    AWLA_LOGICAL    reduce using rule 32 (binary_expr -> binary_expr DIVIDE binary_expr .)
+    LT              reduce using rule 32 (binary_expr -> binary_expr DIVIDE binary_expr .)
+    LE              reduce using rule 32 (binary_expr -> binary_expr DIVIDE binary_expr .)
+    GT              reduce using rule 32 (binary_expr -> binary_expr DIVIDE binary_expr .)
+    GE              reduce using rule 32 (binary_expr -> binary_expr DIVIDE binary_expr .)
+    EQ              reduce using rule 32 (binary_expr -> binary_expr DIVIDE binary_expr .)
+    NE              reduce using rule 32 (binary_expr -> binary_expr DIVIDE binary_expr .)
+    SEMI            reduce using rule 32 (binary_expr -> binary_expr DIVIDE binary_expr .)
+    RPAREN          reduce using rule 32 (binary_expr -> binary_expr DIVIDE binary_expr .)
+    COMMA           reduce using rule 32 (binary_expr -> binary_expr DIVIDE binary_expr .)
+
+  ! PLUS            [ shift and go to state 52 ]
+  ! MINUS           [ shift and go to state 53 ]
+  ! TIMES           [ shift and go to state 54 ]
+  ! DIVIDE          [ shift and go to state 55 ]
+  ! OU              [ shift and go to state 56 ]
+  ! AWLA_LOGICAL    [ shift and go to state 57 ]
+  ! LT              [ shift and go to state 58 ]
+  ! LE              [ shift and go to state 59 ]
+  ! GT              [ shift and go to state 60 ]
+  ! GE              [ shift and go to state 61 ]
+  ! EQ              [ shift and go to state 62 ]
+  ! NE              [ shift and go to state 63 ]
+
+
+state 87
+
+    (33) binary_expr -> binary_expr OU binary_expr .
+    (29) binary_expr -> binary_expr . PLUS binary_expr
+    (30) binary_expr -> binary_expr . MINUS binary_expr
+    (31) binary_expr -> binary_expr . TIMES binary_expr
+    (32) binary_expr -> binary_expr . DIVIDE binary_expr
+    (33) binary_expr -> binary_expr . OU binary_expr
+    (34) binary_expr -> binary_expr . AWLA_LOGICAL binary_expr
+    (35) binary_expr -> binary_expr . LT binary_expr
+    (36) binary_expr -> binary_expr . LE binary_expr
+    (37) binary_expr -> binary_expr . GT binary_expr
+    (38) binary_expr -> binary_expr . GE binary_expr
+    (39) binary_expr -> binary_expr . EQ binary_expr
+    (40) binary_expr -> binary_expr . NE binary_expr
+
+    OU              reduce using rule 33 (binary_expr -> binary_expr OU binary_expr .)
+    AWLA_LOGICAL    reduce using rule 33 (binary_expr -> binary_expr OU binary_expr .)
+    SEMI            reduce using rule 33 (binary_expr -> binary_expr OU binary_expr .)
+    RPAREN          reduce using rule 33 (binary_expr -> binary_expr OU binary_expr .)
+    COMMA           reduce using rule 33 (binary_expr -> binary_expr OU binary_expr .)
+    PLUS            shift and go to state 52
+    MINUS           shift and go to state 53
+    TIMES           shift and go to state 54
+    DIVIDE          shift and go to state 55
+    LT              shift and go to state 58
+    LE              shift and go to state 59
+    GT              shift and go to state 60
+    GE              shift and go to state 61
+    EQ              shift and go to state 62
+    NE              shift and go to state 63
+
+  ! PLUS            [ reduce using rule 33 (binary_expr -> binary_expr OU binary_expr .) ]
+  ! MINUS           [ reduce using rule 33 (binary_expr -> binary_expr OU binary_expr .) ]
+  ! TIMES           [ reduce using rule 33 (binary_expr -> binary_expr OU binary_expr .) ]
+  ! DIVIDE          [ reduce using rule 33 (binary_expr -> binary_expr OU binary_expr .) ]
+  ! LT              [ reduce using rule 33 (binary_expr -> binary_expr OU binary_expr .) ]
+  ! LE              [ reduce using rule 33 (binary_expr -> binary_expr OU binary_expr .) ]
+  ! GT              [ reduce using rule 33 (binary_expr -> binary_expr OU binary_expr .) ]
+  ! GE              [ reduce using rule 33 (binary_expr -> binary_expr OU binary_expr .) ]
+  ! EQ              [ reduce using rule 33 (binary_expr -> binary_expr OU binary_expr .) ]
+  ! NE              [ reduce using rule 33 (binary_expr -> binary_expr OU binary_expr .) ]
+  ! OU              [ shift and go to state 56 ]
+  ! AWLA_LOGICAL    [ shift and go to state 57 ]
+
+
+state 88
+
+    (34) binary_expr -> binary_expr AWLA_LOGICAL binary_expr .
+    (29) binary_expr -> binary_expr . PLUS binary_expr
+    (30) binary_expr -> binary_expr . MINUS binary_expr
+    (31) binary_expr -> binary_expr . TIMES binary_expr
+    (32) binary_expr -> binary_expr . DIVIDE binary_expr
+    (33) binary_expr -> binary_expr . OU binary_expr
+    (34) binary_expr -> binary_expr . AWLA_LOGICAL binary_expr
+    (35) binary_expr -> binary_expr . LT binary_expr
+    (36) binary_expr -> binary_expr . LE binary_expr
+    (37) binary_expr -> binary_expr . GT binary_expr
+    (38) binary_expr -> binary_expr . GE binary_expr
+    (39) binary_expr -> binary_expr . EQ binary_expr
+    (40) binary_expr -> binary_expr . NE binary_expr
+
+    AWLA_LOGICAL    reduce using rule 34 (binary_expr -> binary_expr AWLA_LOGICAL binary_expr .)
+    SEMI            reduce using rule 34 (binary_expr -> binary_expr AWLA_LOGICAL binary_expr .)
+    RPAREN          reduce using rule 34 (binary_expr -> binary_expr AWLA_LOGICAL binary_expr .)
+    COMMA           reduce using rule 34 (binary_expr -> binary_expr AWLA_LOGICAL binary_expr .)
+    PLUS            shift and go to state 52
+    MINUS           shift and go to state 53
+    TIMES           shift and go to state 54
+    DIVIDE          shift and go to state 55
+    OU              shift and go to state 56
+    LT              shift and go to state 58
+    LE              shift and go to state 59
+    GT              shift and go to state 60
+    GE              shift and go to state 61
+    EQ              shift and go to state 62
+    NE              shift and go to state 63
+
+  ! PLUS            [ reduce using rule 34 (binary_expr -> binary_expr AWLA_LOGICAL binary_expr .) ]
+  ! MINUS           [ reduce using rule 34 (binary_expr -> binary_expr AWLA_LOGICAL binary_expr .) ]
+  ! TIMES           [ reduce using rule 34 (binary_expr -> binary_expr AWLA_LOGICAL binary_expr .) ]
+  ! DIVIDE          [ reduce using rule 34 (binary_expr -> binary_expr AWLA_LOGICAL binary_expr .) ]
+  ! OU              [ reduce using rule 34 (binary_expr -> binary_expr AWLA_LOGICAL binary_expr .) ]
+  ! LT              [ reduce using rule 34 (binary_expr -> binary_expr AWLA_LOGICAL binary_expr .) ]
+  ! LE              [ reduce using rule 34 (binary_expr -> binary_expr AWLA_LOGICAL binary_expr .) ]
+  ! GT              [ reduce using rule 34 (binary_expr -> binary_expr AWLA_LOGICAL binary_expr .) ]
+  ! GE              [ reduce using rule 34 (binary_expr -> binary_expr AWLA_LOGICAL binary_expr .) ]
+  ! EQ              [ reduce using rule 34 (binary_expr -> binary_expr AWLA_LOGICAL binary_expr .) ]
+  ! NE              [ reduce using rule 34 (binary_expr -> binary_expr AWLA_LOGICAL binary_expr .) ]
+  ! AWLA_LOGICAL    [ shift and go to state 57 ]
+
+
+state 89
+
+    (35) binary_expr -> binary_expr LT binary_expr .
+    (29) binary_expr -> binary_expr . PLUS binary_expr
+    (30) binary_expr -> binary_expr . MINUS binary_expr
+    (31) binary_expr -> binary_expr . TIMES binary_expr
+    (32) binary_expr -> binary_expr . DIVIDE binary_expr
+    (33) binary_expr -> binary_expr . OU binary_expr
+    (34) binary_expr -> binary_expr . AWLA_LOGICAL binary_expr
+    (35) binary_expr -> binary_expr . LT binary_expr
+    (36) binary_expr -> binary_expr . LE binary_expr
+    (37) binary_expr -> binary_expr . GT binary_expr
+    (38) binary_expr -> binary_expr . GE binary_expr
+    (39) binary_expr -> binary_expr . EQ binary_expr
+    (40) binary_expr -> binary_expr . NE binary_expr
+
+    OU              reduce using rule 35 (binary_expr -> binary_expr LT binary_expr .)
+    AWLA_LOGICAL    reduce using rule 35 (binary_expr -> binary_expr LT binary_expr .)
+    LT              reduce using rule 35 (binary_expr -> binary_expr LT binary_expr .)
+    LE              reduce using rule 35 (binary_expr -> binary_expr LT binary_expr .)
+    GT              reduce using rule 35 (binary_expr -> binary_expr LT binary_expr .)
+    GE              reduce using rule 35 (binary_expr -> binary_expr LT binary_expr .)
+    EQ              reduce using rule 35 (binary_expr -> binary_expr LT binary_expr .)
+    NE              reduce using rule 35 (binary_expr -> binary_expr LT binary_expr .)
+    SEMI            reduce using rule 35 (binary_expr -> binary_expr LT binary_expr .)
+    RPAREN          reduce using rule 35 (binary_expr -> binary_expr LT binary_expr .)
+    COMMA           reduce using rule 35 (binary_expr -> binary_expr LT binary_expr .)
+    PLUS            shift and go to state 52
+    MINUS           shift and go to state 53
+    TIMES           shift and go to state 54
+    DIVIDE          shift and go to state 55
+
+  ! PLUS            [ reduce using rule 35 (binary_expr -> binary_expr LT binary_expr .) ]
+  ! MINUS           [ reduce using rule 35 (binary_expr -> binary_expr LT binary_expr .) ]
+  ! TIMES           [ reduce using rule 35 (binary_expr -> binary_expr LT binary_expr .) ]
+  ! DIVIDE          [ reduce using rule 35 (binary_expr -> binary_expr LT binary_expr .) ]
+  ! OU              [ shift and go to state 56 ]
+  ! AWLA_LOGICAL    [ shift and go to state 57 ]
+  ! LT              [ shift and go to state 58 ]
+  ! LE              [ shift and go to state 59 ]
+  ! GT              [ shift and go to state 60 ]
+  ! GE              [ shift and go to state 61 ]
+  ! EQ              [ shift and go to state 62 ]
+  ! NE              [ shift and go to state 63 ]
+
+
+state 90
+
+    (36) binary_expr -> binary_expr LE binary_expr .
+    (29) binary_expr -> binary_expr . PLUS binary_expr
+    (30) binary_expr -> binary_expr . MINUS binary_expr
+    (31) binary_expr -> binary_expr . TIMES binary_expr
+    (32) binary_expr -> binary_expr . DIVIDE binary_expr
+    (33) binary_expr -> binary_expr . OU binary_expr
+    (34) binary_expr -> binary_expr . AWLA_LOGICAL binary_expr
+    (35) binary_expr -> binary_expr . LT binary_expr
+    (36) binary_expr -> binary_expr . LE binary_expr
+    (37) binary_expr -> binary_expr . GT binary_expr
+    (38) binary_expr -> binary_expr . GE binary_expr
+    (39) binary_expr -> binary_expr . EQ binary_expr
+    (40) binary_expr -> binary_expr . NE binary_expr
+
+    OU              reduce using rule 36 (binary_expr -> binary_expr LE binary_expr .)
+    AWLA_LOGICAL    reduce using rule 36 (binary_expr -> binary_expr LE binary_expr .)
+    LT              reduce using rule 36 (binary_expr -> binary_expr LE binary_expr .)
+    LE              reduce using rule 36 (binary_expr -> binary_expr LE binary_expr .)
+    GT              reduce using rule 36 (binary_expr -> binary_expr LE binary_expr .)
+    GE              reduce using rule 36 (binary_expr -> binary_expr LE binary_expr .)
+    EQ              reduce using rule 36 (binary_expr -> binary_expr LE binary_expr .)
+    NE              reduce using rule 36 (binary_expr -> binary_expr LE binary_expr .)
+    SEMI            reduce using rule 36 (binary_expr -> binary_expr LE binary_expr .)
+    RPAREN          reduce using rule 36 (binary_expr -> binary_expr LE binary_expr .)
+    COMMA           reduce using rule 36 (binary_expr -> binary_expr LE binary_expr .)
+    PLUS            shift and go to state 52
+    MINUS           shift and go to state 53
+    TIMES           shift and go to state 54
+    DIVIDE          shift and go to state 55
+
+  ! PLUS            [ reduce using rule 36 (binary_expr -> binary_expr LE binary_expr .) ]
+  ! MINUS           [ reduce using rule 36 (binary_expr -> binary_expr LE binary_expr .) ]
+  ! TIMES           [ reduce using rule 36 (binary_expr -> binary_expr LE binary_expr .) ]
+  ! DIVIDE          [ reduce using rule 36 (binary_expr -> binary_expr LE binary_expr .) ]
+  ! OU              [ shift and go to state 56 ]
+  ! AWLA_LOGICAL    [ shift and go to state 57 ]
+  ! LT              [ shift and go to state 58 ]
+  ! LE              [ shift and go to state 59 ]
+  ! GT              [ shift and go to state 60 ]
+  ! GE              [ shift and go to state 61 ]
+  ! EQ              [ shift and go to state 62 ]
+  ! NE              [ shift and go to state 63 ]
+
+
+state 91
+
+    (37) binary_expr -> binary_expr GT binary_expr .
+    (29) binary_expr -> binary_expr . PLUS binary_expr
+    (30) binary_expr -> binary_expr . MINUS binary_expr
+    (31) binary_expr -> binary_expr . TIMES binary_expr
+    (32) binary_expr -> binary_expr . DIVIDE binary_expr
+    (33) binary_expr -> binary_expr . OU binary_expr
+    (34) binary_expr -> binary_expr . AWLA_LOGICAL binary_expr
+    (35) binary_expr -> binary_expr . LT binary_expr
+    (36) binary_expr -> binary_expr . LE binary_expr
+    (37) binary_expr -> binary_expr . GT binary_expr
+    (38) binary_expr -> binary_expr . GE binary_expr
+    (39) binary_expr -> binary_expr . EQ binary_expr
+    (40) binary_expr -> binary_expr . NE binary_expr
+
+    OU              reduce using rule 37 (binary_expr -> binary_expr GT binary_expr .)
+    AWLA_LOGICAL    reduce using rule 37 (binary_expr -> binary_expr GT binary_expr .)
+    LT              reduce using rule 37 (binary_expr -> binary_expr GT binary_expr .)
+    LE              reduce using rule 37 (binary_expr -> binary_expr GT binary_expr .)
+    GT              reduce using rule 37 (binary_expr -> binary_expr GT binary_expr .)
+    GE              reduce using rule 37 (binary_expr -> binary_expr GT binary_expr .)
+    EQ              reduce using rule 37 (binary_expr -> binary_expr GT binary_expr .)
+    NE              reduce using rule 37 (binary_expr -> binary_expr GT binary_expr .)
+    SEMI            reduce using rule 37 (binary_expr -> binary_expr GT binary_expr .)
+    RPAREN          reduce using rule 37 (binary_expr -> binary_expr GT binary_expr .)
+    COMMA           reduce using rule 37 (binary_expr -> binary_expr GT binary_expr .)
+    PLUS            shift and go to state 52
+    MINUS           shift and go to state 53
+    TIMES           shift and go to state 54
+    DIVIDE          shift and go to state 55
+
+  ! PLUS            [ reduce using rule 37 (binary_expr -> binary_expr GT binary_expr .) ]
+  ! MINUS           [ reduce using rule 37 (binary_expr -> binary_expr GT binary_expr .) ]
+  ! TIMES           [ reduce using rule 37 (binary_expr -> binary_expr GT binary_expr .) ]
+  ! DIVIDE          [ reduce using rule 37 (binary_expr -> binary_expr GT binary_expr .) ]
+  ! OU              [ shift and go to state 56 ]
+  ! AWLA_LOGICAL    [ shift and go to state 57 ]
+  ! LT              [ shift and go to state 58 ]
+  ! LE              [ shift and go to state 59 ]
+  ! GT              [ shift and go to state 60 ]
+  ! GE              [ shift and go to state 61 ]
+  ! EQ              [ shift and go to state 62 ]
+  ! NE              [ shift and go to state 63 ]
+
+
+state 92
+
+    (38) binary_expr -> binary_expr GE binary_expr .
+    (29) binary_expr -> binary_expr . PLUS binary_expr
+    (30) binary_expr -> binary_expr . MINUS binary_expr
+    (31) binary_expr -> binary_expr . TIMES binary_expr
+    (32) binary_expr -> binary_expr . DIVIDE binary_expr
+    (33) binary_expr -> binary_expr . OU binary_expr
+    (34) binary_expr -> binary_expr . AWLA_LOGICAL binary_expr
+    (35) binary_expr -> binary_expr . LT binary_expr
+    (36) binary_expr -> binary_expr . LE binary_expr
+    (37) binary_expr -> binary_expr . GT binary_expr
+    (38) binary_expr -> binary_expr . GE binary_expr
+    (39) binary_expr -> binary_expr . EQ binary_expr
+    (40) binary_expr -> binary_expr . NE binary_expr
+
+    OU              reduce using rule 38 (binary_expr -> binary_expr GE binary_expr .)
+    AWLA_LOGICAL    reduce using rule 38 (binary_expr -> binary_expr GE binary_expr .)
+    LT              reduce using rule 38 (binary_expr -> binary_expr GE binary_expr .)
+    LE              reduce using rule 38 (binary_expr -> binary_expr GE binary_expr .)
+    GT              reduce using rule 38 (binary_expr -> binary_expr GE binary_expr .)
+    GE              reduce using rule 38 (binary_expr -> binary_expr GE binary_expr .)
+    EQ              reduce using rule 38 (binary_expr -> binary_expr GE binary_expr .)
+    NE              reduce using rule 38 (binary_expr -> binary_expr GE binary_expr .)
+    SEMI            reduce using rule 38 (binary_expr -> binary_expr GE binary_expr .)
+    RPAREN          reduce using rule 38 (binary_expr -> binary_expr GE binary_expr .)
+    COMMA           reduce using rule 38 (binary_expr -> binary_expr GE binary_expr .)
+    PLUS            shift and go to state 52
+    MINUS           shift and go to state 53
+    TIMES           shift and go to state 54
+    DIVIDE          shift and go to state 55
+
+  ! PLUS            [ reduce using rule 38 (binary_expr -> binary_expr GE binary_expr .) ]
+  ! MINUS           [ reduce using rule 38 (binary_expr -> binary_expr GE binary_expr .) ]
+  ! TIMES           [ reduce using rule 38 (binary_expr -> binary_expr GE binary_expr .) ]
+  ! DIVIDE          [ reduce using rule 38 (binary_expr -> binary_expr GE binary_expr .) ]
+  ! OU              [ shift and go to state 56 ]
+  ! AWLA_LOGICAL    [ shift and go to state 57 ]
+  ! LT              [ shift and go to state 58 ]
+  ! LE              [ shift and go to state 59 ]
+  ! GT              [ shift and go to state 60 ]
+  ! GE              [ shift and go to state 61 ]
+  ! EQ              [ shift and go to state 62 ]
+  ! NE              [ shift and go to state 63 ]
+
+
+state 93
+
+    (39) binary_expr -> binary_expr EQ binary_expr .
+    (29) binary_expr -> binary_expr . PLUS binary_expr
+    (30) binary_expr -> binary_expr . MINUS binary_expr
+    (31) binary_expr -> binary_expr . TIMES binary_expr
+    (32) binary_expr -> binary_expr . DIVIDE binary_expr
+    (33) binary_expr -> binary_expr . OU binary_expr
+    (34) binary_expr -> binary_expr . AWLA_LOGICAL binary_expr
+    (35) binary_expr -> binary_expr . LT binary_expr
+    (36) binary_expr -> binary_expr . LE binary_expr
+    (37) binary_expr -> binary_expr . GT binary_expr
+    (38) binary_expr -> binary_expr . GE binary_expr
+    (39) binary_expr -> binary_expr . EQ binary_expr
+    (40) binary_expr -> binary_expr . NE binary_expr
+
+    OU              reduce using rule 39 (binary_expr -> binary_expr EQ binary_expr .)
+    AWLA_LOGICAL    reduce using rule 39 (binary_expr -> binary_expr EQ binary_expr .)
+    EQ              reduce using rule 39 (binary_expr -> binary_expr EQ binary_expr .)
+    NE              reduce using rule 39 (binary_expr -> binary_expr EQ binary_expr .)
+    SEMI            reduce using rule 39 (binary_expr -> binary_expr EQ binary_expr .)
+    RPAREN          reduce using rule 39 (binary_expr -> binary_expr EQ binary_expr .)
+    COMMA           reduce using rule 39 (binary_expr -> binary_expr EQ binary_expr .)
+    PLUS            shift and go to state 52
+    MINUS           shift and go to state 53
+    TIMES           shift and go to state 54
+    DIVIDE          shift and go to state 55
+    LT              shift and go to state 58
+    LE              shift and go to state 59
+    GT              shift and go to state 60
+    GE              shift and go to state 61
+
+  ! PLUS            [ reduce using rule 39 (binary_expr -> binary_expr EQ binary_expr .) ]
+  ! MINUS           [ reduce using rule 39 (binary_expr -> binary_expr EQ binary_expr .) ]
+  ! TIMES           [ reduce using rule 39 (binary_expr -> binary_expr EQ binary_expr .) ]
+  ! DIVIDE          [ reduce using rule 39 (binary_expr -> binary_expr EQ binary_expr .) ]
+  ! LT              [ reduce using rule 39 (binary_expr -> binary_expr EQ binary_expr .) ]
+  ! LE              [ reduce using rule 39 (binary_expr -> binary_expr EQ binary_expr .) ]
+  ! GT              [ reduce using rule 39 (binary_expr -> binary_expr EQ binary_expr .) ]
+  ! GE              [ reduce using rule 39 (binary_expr -> binary_expr EQ binary_expr .) ]
+  ! OU              [ shift and go to state 56 ]
+  ! AWLA_LOGICAL    [ shift and go to state 57 ]
+  ! EQ              [ shift and go to state 62 ]
+  ! NE              [ shift and go to state 63 ]
+
+
+state 94
+
+    (40) binary_expr -> binary_expr NE binary_expr .
+    (29) binary_expr -> binary_expr . PLUS binary_expr
+    (30) binary_expr -> binary_expr . MINUS binary_expr
+    (31) binary_expr -> binary_expr . TIMES binary_expr
+    (32) binary_expr -> binary_expr . DIVIDE binary_expr
+    (33) binary_expr -> binary_expr . OU binary_expr
+    (34) binary_expr -> binary_expr . AWLA_LOGICAL binary_expr
+    (35) binary_expr -> binary_expr . LT binary_expr
+    (36) binary_expr -> binary_expr . LE binary_expr
+    (37) binary_expr -> binary_expr . GT binary_expr
+    (38) binary_expr -> binary_expr . GE binary_expr
+    (39) binary_expr -> binary_expr . EQ binary_expr
+    (40) binary_expr -> binary_expr . NE binary_expr
+
+    OU              reduce using rule 40 (binary_expr -> binary_expr NE binary_expr .)
+    AWLA_LOGICAL    reduce using rule 40 (binary_expr -> binary_expr NE binary_expr .)
+    EQ              reduce using rule 40 (binary_expr -> binary_expr NE binary_expr .)
+    NE              reduce using rule 40 (binary_expr -> binary_expr NE binary_expr .)
+    SEMI            reduce using rule 40 (binary_expr -> binary_expr NE binary_expr .)
+    RPAREN          reduce using rule 40 (binary_expr -> binary_expr NE binary_expr .)
+    COMMA           reduce using rule 40 (binary_expr -> binary_expr NE binary_expr .)
+    PLUS            shift and go to state 52
+    MINUS           shift and go to state 53
+    TIMES           shift and go to state 54
+    DIVIDE          shift and go to state 55
+    LT              shift and go to state 58
+    LE              shift and go to state 59
+    GT              shift and go to state 60
+    GE              shift and go to state 61
+
+  ! PLUS            [ reduce using rule 40 (binary_expr -> binary_expr NE binary_expr .) ]
+  ! MINUS           [ reduce using rule 40 (binary_expr -> binary_expr NE binary_expr .) ]
+  ! TIMES           [ reduce using rule 40 (binary_expr -> binary_expr NE binary_expr .) ]
+  ! DIVIDE          [ reduce using rule 40 (binary_expr -> binary_expr NE binary_expr .) ]
+  ! LT              [ reduce using rule 40 (binary_expr -> binary_expr NE binary_expr .) ]
+  ! LE              [ reduce using rule 40 (binary_expr -> binary_expr NE binary_expr .) ]
+  ! GT              [ reduce using rule 40 (binary_expr -> binary_expr NE binary_expr .) ]
+  ! GE              [ reduce using rule 40 (binary_expr -> binary_expr NE binary_expr .) ]
+  ! OU              [ shift and go to state 56 ]
+  ! AWLA_LOGICAL    [ shift and go to state 57 ]
+  ! EQ              [ shift and go to state 62 ]
+  ! NE              [ shift and go to state 63 ]
+
+
+state 95
+
+    (9) param_list_nonempty -> TYPE . ID
+    (10) param_list_nonempty -> TYPE . ID COMMA param_list_nonempty
+
+    ID              shift and go to state 106
+
+
+state 96
+
+    (6) function_def -> TYPE ID LPAREN param_list . RPAREN compound
+
+    RPAREN          shift and go to state 107
+
+
+state 97
+
+    (7) param_list -> param_list_nonempty .
+
+    RPAREN          reduce using rule 7 (param_list -> param_list_nonempty .)
+
+
+state 98
+
+    (8) param_list -> empty .
+
+    RPAREN          reduce using rule 8 (param_list -> empty .)
+
+
+state 99
+
+    (24) declaration_stmt -> TYPE ID ASSIGN expression . SEMI
+
+    SEMI            shift and go to state 108
+
+
+state 100
+
+    (50) func_call -> ID LPAREN arg_list RPAREN .
+
+    PLUS            reduce using rule 50 (func_call -> ID LPAREN arg_list RPAREN .)
+    MINUS           reduce using rule 50 (func_call -> ID LPAREN arg_list RPAREN .)
+    TIMES           reduce using rule 50 (func_call -> ID LPAREN arg_list RPAREN .)
+    DIVIDE          reduce using rule 50 (func_call -> ID LPAREN arg_list RPAREN .)
+    OU              reduce using rule 50 (func_call -> ID LPAREN arg_list RPAREN .)
+    AWLA_LOGICAL    reduce using rule 50 (func_call -> ID LPAREN arg_list RPAREN .)
+    LT              reduce using rule 50 (func_call -> ID LPAREN arg_list RPAREN .)
+    LE              reduce using rule 50 (func_call -> ID LPAREN arg_list RPAREN .)
+    GT              reduce using rule 50 (func_call -> ID LPAREN arg_list RPAREN .)
+    GE              reduce using rule 50 (func_call -> ID LPAREN arg_list RPAREN .)
+    EQ              reduce using rule 50 (func_call -> ID LPAREN arg_list RPAREN .)
+    NE              reduce using rule 50 (func_call -> ID LPAREN arg_list RPAREN .)
+    SEMI            reduce using rule 50 (func_call -> ID LPAREN arg_list RPAREN .)
+    RPAREN          reduce using rule 50 (func_call -> ID LPAREN arg_list RPAREN .)
+    COMMA           reduce using rule 50 (func_call -> ID LPAREN arg_list RPAREN .)
+
+
+state 101
+
+    (54) arg_list_nonempty -> expression COMMA . arg_list_nonempty
+    (53) arg_list_nonempty -> . expression
+    (54) arg_list_nonempty -> . expression COMMA arg_list_nonempty
+    (26) expression -> . assignment
+    (27) expression -> . binary_expr
+    (28) assignment -> . ID ASSIGN expression
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    ID              shift and go to state 8
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+
+    expression                     shift and go to state 74
+    arg_list_nonempty              shift and go to state 109
+    assignment                     shift and go to state 27
+    binary_expr                    shift and go to state 28
+    func_call                      shift and go to state 35
+
+state 102
+
+    (55) if_stmt -> ILA LPAREN expression RPAREN . statement AWLA statement
+    (56) if_stmt -> ILA LPAREN expression RPAREN . statement
+    (14) statement -> . declaration_stmt
+    (15) statement -> . expression_stmt
+    (16) statement -> . if_stmt
+    (17) statement -> . while_stmt
+    (18) statement -> . for_stmt
+    (19) statement -> . return_stmt
+    (20) statement -> . break_stmt
+    (21) statement -> . continue_stmt
+    (22) statement -> . compound
+    (23) declaration_stmt -> . TYPE ID SEMI
+    (24) declaration_stmt -> . TYPE ID ASSIGN expression SEMI
+    (25) expression_stmt -> . expression SEMI
+    (55) if_stmt -> . ILA LPAREN expression RPAREN statement AWLA statement
+    (56) if_stmt -> . ILA LPAREN expression RPAREN statement
+    (57) while_stmt -> . MNINTCHOUF LPAREN expression RPAREN statement
+    (58) for_stmt -> . KOULLA LPAREN opt_expr SEMI opt_expr SEMI opt_expr RPAREN statement
+    (63) return_stmt -> . RJ3 opt_expr SEMI
+    (61) break_stmt -> . HRASS SEMI
+    (62) continue_stmt -> . KML SEMI
+    (11) compound -> . LBRACE stmt_list RBRACE
+    (26) expression -> . assignment
+    (27) expression -> . binary_expr
+    (28) assignment -> . ID ASSIGN expression
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    TYPE            shift and go to state 82
+    ILA             shift and go to state 20
+    MNINTCHOUF      shift and go to state 21
+    KOULLA          shift and go to state 22
+    RJ3             shift and go to state 23
+    HRASS           shift and go to state 24
+    KML             shift and go to state 25
+    LBRACE          shift and go to state 26
+    ID              shift and go to state 8
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+
+    expression                     shift and go to state 19
+    statement                      shift and go to state 110
+    declaration_stmt               shift and go to state 11
+    expression_stmt                shift and go to state 12
+    if_stmt                        shift and go to state 13
+    while_stmt                     shift and go to state 14
+    for_stmt                       shift and go to state 15
+    return_stmt                    shift and go to state 16
+    break_stmt                     shift and go to state 17
+    continue_stmt                  shift and go to state 18
+    compound                       shift and go to state 10
+    assignment                     shift and go to state 27
+    binary_expr                    shift and go to state 28
+    func_call                      shift and go to state 35
+
+state 103
+
+    (57) while_stmt -> MNINTCHOUF LPAREN expression RPAREN . statement
+    (14) statement -> . declaration_stmt
+    (15) statement -> . expression_stmt
+    (16) statement -> . if_stmt
+    (17) statement -> . while_stmt
+    (18) statement -> . for_stmt
+    (19) statement -> . return_stmt
+    (20) statement -> . break_stmt
+    (21) statement -> . continue_stmt
+    (22) statement -> . compound
+    (23) declaration_stmt -> . TYPE ID SEMI
+    (24) declaration_stmt -> . TYPE ID ASSIGN expression SEMI
+    (25) expression_stmt -> . expression SEMI
+    (55) if_stmt -> . ILA LPAREN expression RPAREN statement AWLA statement
+    (56) if_stmt -> . ILA LPAREN expression RPAREN statement
+    (57) while_stmt -> . MNINTCHOUF LPAREN expression RPAREN statement
+    (58) for_stmt -> . KOULLA LPAREN opt_expr SEMI opt_expr SEMI opt_expr RPAREN statement
+    (63) return_stmt -> . RJ3 opt_expr SEMI
+    (61) break_stmt -> . HRASS SEMI
+    (62) continue_stmt -> . KML SEMI
+    (11) compound -> . LBRACE stmt_list RBRACE
+    (26) expression -> . assignment
+    (27) expression -> . binary_expr
+    (28) assignment -> . ID ASSIGN expression
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    TYPE            shift and go to state 82
+    ILA             shift and go to state 20
+    MNINTCHOUF      shift and go to state 21
+    KOULLA          shift and go to state 22
+    RJ3             shift and go to state 23
+    HRASS           shift and go to state 24
+    KML             shift and go to state 25
+    LBRACE          shift and go to state 26
+    ID              shift and go to state 8
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+
+    expression                     shift and go to state 19
+    statement                      shift and go to state 111
+    declaration_stmt               shift and go to state 11
+    expression_stmt                shift and go to state 12
+    if_stmt                        shift and go to state 13
+    while_stmt                     shift and go to state 14
+    for_stmt                       shift and go to state 15
+    return_stmt                    shift and go to state 16
+    break_stmt                     shift and go to state 17
+    continue_stmt                  shift and go to state 18
+    compound                       shift and go to state 10
+    assignment                     shift and go to state 27
+    binary_expr                    shift and go to state 28
+    func_call                      shift and go to state 35
+
+state 104
+
+    (58) for_stmt -> KOULLA LPAREN opt_expr SEMI . opt_expr SEMI opt_expr RPAREN statement
+    (59) opt_expr -> . expression
+    (60) opt_expr -> . empty
+    (26) expression -> . assignment
+    (27) expression -> . binary_expr
+    (64) empty -> .
+    (28) assignment -> . ID ASSIGN expression
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    SEMI            reduce using rule 64 (empty -> .)
+    ID              shift and go to state 8
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+
+    opt_expr                       shift and go to state 112
+    expression                     shift and go to state 46
+    empty                          shift and go to state 47
+    assignment                     shift and go to state 27
+    binary_expr                    shift and go to state 28
+    func_call                      shift and go to state 35
+
+state 105
+
+    (23) declaration_stmt -> TYPE ID . SEMI
+    (24) declaration_stmt -> TYPE ID . ASSIGN expression SEMI
+
+    SEMI            shift and go to state 68
+    ASSIGN          shift and go to state 69
+
+
+state 106
+
+    (9) param_list_nonempty -> TYPE ID .
+    (10) param_list_nonempty -> TYPE ID . COMMA param_list_nonempty
+
+    RPAREN          reduce using rule 9 (param_list_nonempty -> TYPE ID .)
+    COMMA           shift and go to state 113
+
+
+state 107
+
+    (6) function_def -> TYPE ID LPAREN param_list RPAREN . compound
+    (11) compound -> . LBRACE stmt_list RBRACE
+
+    LBRACE          shift and go to state 26
+
+    compound                       shift and go to state 114
+
+state 108
+
+    (24) declaration_stmt -> TYPE ID ASSIGN expression SEMI .
+
+    TYPE            reduce using rule 24 (declaration_stmt -> TYPE ID ASSIGN expression SEMI .)
+    ILA             reduce using rule 24 (declaration_stmt -> TYPE ID ASSIGN expression SEMI .)
+    MNINTCHOUF      reduce using rule 24 (declaration_stmt -> TYPE ID ASSIGN expression SEMI .)
+    KOULLA          reduce using rule 24 (declaration_stmt -> TYPE ID ASSIGN expression SEMI .)
+    RJ3             reduce using rule 24 (declaration_stmt -> TYPE ID ASSIGN expression SEMI .)
+    HRASS           reduce using rule 24 (declaration_stmt -> TYPE ID ASSIGN expression SEMI .)
+    KML             reduce using rule 24 (declaration_stmt -> TYPE ID ASSIGN expression SEMI .)
+    LBRACE          reduce using rule 24 (declaration_stmt -> TYPE ID ASSIGN expression SEMI .)
+    ID              reduce using rule 24 (declaration_stmt -> TYPE ID ASSIGN expression SEMI .)
+    MINUS           reduce using rule 24 (declaration_stmt -> TYPE ID ASSIGN expression SEMI .)
+    MACHI           reduce using rule 24 (declaration_stmt -> TYPE ID ASSIGN expression SEMI .)
+    LPAREN          reduce using rule 24 (declaration_stmt -> TYPE ID ASSIGN expression SEMI .)
+    NUMBER          reduce using rule 24 (declaration_stmt -> TYPE ID ASSIGN expression SEMI .)
+    STRING          reduce using rule 24 (declaration_stmt -> TYPE ID ASSIGN expression SEMI .)
+    BOOL            reduce using rule 24 (declaration_stmt -> TYPE ID ASSIGN expression SEMI .)
+    NULL            reduce using rule 24 (declaration_stmt -> TYPE ID ASSIGN expression SEMI .)
+    $end            reduce using rule 24 (declaration_stmt -> TYPE ID ASSIGN expression SEMI .)
+    RBRACE          reduce using rule 24 (declaration_stmt -> TYPE ID ASSIGN expression SEMI .)
+    AWLA            reduce using rule 24 (declaration_stmt -> TYPE ID ASSIGN expression SEMI .)
+
+
+state 109
+
+    (54) arg_list_nonempty -> expression COMMA arg_list_nonempty .
+
+    RPAREN          reduce using rule 54 (arg_list_nonempty -> expression COMMA arg_list_nonempty .)
+
+
+state 110
+
+    (55) if_stmt -> ILA LPAREN expression RPAREN statement . AWLA statement
+    (56) if_stmt -> ILA LPAREN expression RPAREN statement .
+
+    AWLA            shift and go to state 115
+    TYPE            reduce using rule 56 (if_stmt -> ILA LPAREN expression RPAREN statement .)
+    ILA             reduce using rule 56 (if_stmt -> ILA LPAREN expression RPAREN statement .)
+    MNINTCHOUF      reduce using rule 56 (if_stmt -> ILA LPAREN expression RPAREN statement .)
+    KOULLA          reduce using rule 56 (if_stmt -> ILA LPAREN expression RPAREN statement .)
+    RJ3             reduce using rule 56 (if_stmt -> ILA LPAREN expression RPAREN statement .)
+    HRASS           reduce using rule 56 (if_stmt -> ILA LPAREN expression RPAREN statement .)
+    KML             reduce using rule 56 (if_stmt -> ILA LPAREN expression RPAREN statement .)
+    LBRACE          reduce using rule 56 (if_stmt -> ILA LPAREN expression RPAREN statement .)
+    ID              reduce using rule 56 (if_stmt -> ILA LPAREN expression RPAREN statement .)
+    MINUS           reduce using rule 56 (if_stmt -> ILA LPAREN expression RPAREN statement .)
+    MACHI           reduce using rule 56 (if_stmt -> ILA LPAREN expression RPAREN statement .)
+    LPAREN          reduce using rule 56 (if_stmt -> ILA LPAREN expression RPAREN statement .)
+    NUMBER          reduce using rule 56 (if_stmt -> ILA LPAREN expression RPAREN statement .)
+    STRING          reduce using rule 56 (if_stmt -> ILA LPAREN expression RPAREN statement .)
+    BOOL            reduce using rule 56 (if_stmt -> ILA LPAREN expression RPAREN statement .)
+    NULL            reduce using rule 56 (if_stmt -> ILA LPAREN expression RPAREN statement .)
+    $end            reduce using rule 56 (if_stmt -> ILA LPAREN expression RPAREN statement .)
+    RBRACE          reduce using rule 56 (if_stmt -> ILA LPAREN expression RPAREN statement .)
+
+  ! AWLA            [ reduce using rule 56 (if_stmt -> ILA LPAREN expression RPAREN statement .) ]
+
+
+state 111
+
+    (57) while_stmt -> MNINTCHOUF LPAREN expression RPAREN statement .
+
+    TYPE            reduce using rule 57 (while_stmt -> MNINTCHOUF LPAREN expression RPAREN statement .)
+    ILA             reduce using rule 57 (while_stmt -> MNINTCHOUF LPAREN expression RPAREN statement .)
+    MNINTCHOUF      reduce using rule 57 (while_stmt -> MNINTCHOUF LPAREN expression RPAREN statement .)
+    KOULLA          reduce using rule 57 (while_stmt -> MNINTCHOUF LPAREN expression RPAREN statement .)
+    RJ3             reduce using rule 57 (while_stmt -> MNINTCHOUF LPAREN expression RPAREN statement .)
+    HRASS           reduce using rule 57 (while_stmt -> MNINTCHOUF LPAREN expression RPAREN statement .)
+    KML             reduce using rule 57 (while_stmt -> MNINTCHOUF LPAREN expression RPAREN statement .)
+    LBRACE          reduce using rule 57 (while_stmt -> MNINTCHOUF LPAREN expression RPAREN statement .)
+    ID              reduce using rule 57 (while_stmt -> MNINTCHOUF LPAREN expression RPAREN statement .)
+    MINUS           reduce using rule 57 (while_stmt -> MNINTCHOUF LPAREN expression RPAREN statement .)
+    MACHI           reduce using rule 57 (while_stmt -> MNINTCHOUF LPAREN expression RPAREN statement .)
+    LPAREN          reduce using rule 57 (while_stmt -> MNINTCHOUF LPAREN expression RPAREN statement .)
+    NUMBER          reduce using rule 57 (while_stmt -> MNINTCHOUF LPAREN expression RPAREN statement .)
+    STRING          reduce using rule 57 (while_stmt -> MNINTCHOUF LPAREN expression RPAREN statement .)
+    BOOL            reduce using rule 57 (while_stmt -> MNINTCHOUF LPAREN expression RPAREN statement .)
+    NULL            reduce using rule 57 (while_stmt -> MNINTCHOUF LPAREN expression RPAREN statement .)
+    $end            reduce using rule 57 (while_stmt -> MNINTCHOUF LPAREN expression RPAREN statement .)
+    RBRACE          reduce using rule 57 (while_stmt -> MNINTCHOUF LPAREN expression RPAREN statement .)
+    AWLA            reduce using rule 57 (while_stmt -> MNINTCHOUF LPAREN expression RPAREN statement .)
+
+
+state 112
+
+    (58) for_stmt -> KOULLA LPAREN opt_expr SEMI opt_expr . SEMI opt_expr RPAREN statement
+
+    SEMI            shift and go to state 116
+
+
+state 113
+
+    (10) param_list_nonempty -> TYPE ID COMMA . param_list_nonempty
+    (9) param_list_nonempty -> . TYPE ID
+    (10) param_list_nonempty -> . TYPE ID COMMA param_list_nonempty
+
+    TYPE            shift and go to state 95
+
+    param_list_nonempty            shift and go to state 117
+
+state 114
+
+    (6) function_def -> TYPE ID LPAREN param_list RPAREN compound .
+
+    TYPE            reduce using rule 6 (function_def -> TYPE ID LPAREN param_list RPAREN compound .)
+    ILA             reduce using rule 6 (function_def -> TYPE ID LPAREN param_list RPAREN compound .)
+    MNINTCHOUF      reduce using rule 6 (function_def -> TYPE ID LPAREN param_list RPAREN compound .)
+    KOULLA          reduce using rule 6 (function_def -> TYPE ID LPAREN param_list RPAREN compound .)
+    RJ3             reduce using rule 6 (function_def -> TYPE ID LPAREN param_list RPAREN compound .)
+    HRASS           reduce using rule 6 (function_def -> TYPE ID LPAREN param_list RPAREN compound .)
+    KML             reduce using rule 6 (function_def -> TYPE ID LPAREN param_list RPAREN compound .)
+    LBRACE          reduce using rule 6 (function_def -> TYPE ID LPAREN param_list RPAREN compound .)
+    ID              reduce using rule 6 (function_def -> TYPE ID LPAREN param_list RPAREN compound .)
+    MINUS           reduce using rule 6 (function_def -> TYPE ID LPAREN param_list RPAREN compound .)
+    MACHI           reduce using rule 6 (function_def -> TYPE ID LPAREN param_list RPAREN compound .)
+    LPAREN          reduce using rule 6 (function_def -> TYPE ID LPAREN param_list RPAREN compound .)
+    NUMBER          reduce using rule 6 (function_def -> TYPE ID LPAREN param_list RPAREN compound .)
+    STRING          reduce using rule 6 (function_def -> TYPE ID LPAREN param_list RPAREN compound .)
+    BOOL            reduce using rule 6 (function_def -> TYPE ID LPAREN param_list RPAREN compound .)
+    NULL            reduce using rule 6 (function_def -> TYPE ID LPAREN param_list RPAREN compound .)
+    $end            reduce using rule 6 (function_def -> TYPE ID LPAREN param_list RPAREN compound .)
+
+
+state 115
+
+    (55) if_stmt -> ILA LPAREN expression RPAREN statement AWLA . statement
+    (14) statement -> . declaration_stmt
+    (15) statement -> . expression_stmt
+    (16) statement -> . if_stmt
+    (17) statement -> . while_stmt
+    (18) statement -> . for_stmt
+    (19) statement -> . return_stmt
+    (20) statement -> . break_stmt
+    (21) statement -> . continue_stmt
+    (22) statement -> . compound
+    (23) declaration_stmt -> . TYPE ID SEMI
+    (24) declaration_stmt -> . TYPE ID ASSIGN expression SEMI
+    (25) expression_stmt -> . expression SEMI
+    (55) if_stmt -> . ILA LPAREN expression RPAREN statement AWLA statement
+    (56) if_stmt -> . ILA LPAREN expression RPAREN statement
+    (57) while_stmt -> . MNINTCHOUF LPAREN expression RPAREN statement
+    (58) for_stmt -> . KOULLA LPAREN opt_expr SEMI opt_expr SEMI opt_expr RPAREN statement
+    (63) return_stmt -> . RJ3 opt_expr SEMI
+    (61) break_stmt -> . HRASS SEMI
+    (62) continue_stmt -> . KML SEMI
+    (11) compound -> . LBRACE stmt_list RBRACE
+    (26) expression -> . assignment
+    (27) expression -> . binary_expr
+    (28) assignment -> . ID ASSIGN expression
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    TYPE            shift and go to state 82
+    ILA             shift and go to state 20
+    MNINTCHOUF      shift and go to state 21
+    KOULLA          shift and go to state 22
+    RJ3             shift and go to state 23
+    HRASS           shift and go to state 24
+    KML             shift and go to state 25
+    LBRACE          shift and go to state 26
+    ID              shift and go to state 8
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+
+    expression                     shift and go to state 19
+    statement                      shift and go to state 118
+    declaration_stmt               shift and go to state 11
+    expression_stmt                shift and go to state 12
+    if_stmt                        shift and go to state 13
+    while_stmt                     shift and go to state 14
+    for_stmt                       shift and go to state 15
+    return_stmt                    shift and go to state 16
+    break_stmt                     shift and go to state 17
+    continue_stmt                  shift and go to state 18
+    compound                       shift and go to state 10
+    assignment                     shift and go to state 27
+    binary_expr                    shift and go to state 28
+    func_call                      shift and go to state 35
+
+state 116
+
+    (58) for_stmt -> KOULLA LPAREN opt_expr SEMI opt_expr SEMI . opt_expr RPAREN statement
+    (59) opt_expr -> . expression
+    (60) opt_expr -> . empty
+    (26) expression -> . assignment
+    (27) expression -> . binary_expr
+    (64) empty -> .
+    (28) assignment -> . ID ASSIGN expression
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    RPAREN          reduce using rule 64 (empty -> .)
+    ID              shift and go to state 8
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+
+    opt_expr                       shift and go to state 119
+    expression                     shift and go to state 46
+    empty                          shift and go to state 47
+    assignment                     shift and go to state 27
+    binary_expr                    shift and go to state 28
+    func_call                      shift and go to state 35
+
+state 117
+
+    (10) param_list_nonempty -> TYPE ID COMMA param_list_nonempty .
+
+    RPAREN          reduce using rule 10 (param_list_nonempty -> TYPE ID COMMA param_list_nonempty .)
+
+
+state 118
+
+    (55) if_stmt -> ILA LPAREN expression RPAREN statement AWLA statement .
+
+    TYPE            reduce using rule 55 (if_stmt -> ILA LPAREN expression RPAREN statement AWLA statement .)
+    ILA             reduce using rule 55 (if_stmt -> ILA LPAREN expression RPAREN statement AWLA statement .)
+    MNINTCHOUF      reduce using rule 55 (if_stmt -> ILA LPAREN expression RPAREN statement AWLA statement .)
+    KOULLA          reduce using rule 55 (if_stmt -> ILA LPAREN expression RPAREN statement AWLA statement .)
+    RJ3             reduce using rule 55 (if_stmt -> ILA LPAREN expression RPAREN statement AWLA statement .)
+    HRASS           reduce using rule 55 (if_stmt -> ILA LPAREN expression RPAREN statement AWLA statement .)
+    KML             reduce using rule 55 (if_stmt -> ILA LPAREN expression RPAREN statement AWLA statement .)
+    LBRACE          reduce using rule 55 (if_stmt -> ILA LPAREN expression RPAREN statement AWLA statement .)
+    ID              reduce using rule 55 (if_stmt -> ILA LPAREN expression RPAREN statement AWLA statement .)
+    MINUS           reduce using rule 55 (if_stmt -> ILA LPAREN expression RPAREN statement AWLA statement .)
+    MACHI           reduce using rule 55 (if_stmt -> ILA LPAREN expression RPAREN statement AWLA statement .)
+    LPAREN          reduce using rule 55 (if_stmt -> ILA LPAREN expression RPAREN statement AWLA statement .)
+    NUMBER          reduce using rule 55 (if_stmt -> ILA LPAREN expression RPAREN statement AWLA statement .)
+    STRING          reduce using rule 55 (if_stmt -> ILA LPAREN expression RPAREN statement AWLA statement .)
+    BOOL            reduce using rule 55 (if_stmt -> ILA LPAREN expression RPAREN statement AWLA statement .)
+    NULL            reduce using rule 55 (if_stmt -> ILA LPAREN expression RPAREN statement AWLA statement .)
+    $end            reduce using rule 55 (if_stmt -> ILA LPAREN expression RPAREN statement AWLA statement .)
+    RBRACE          reduce using rule 55 (if_stmt -> ILA LPAREN expression RPAREN statement AWLA statement .)
+    AWLA            reduce using rule 55 (if_stmt -> ILA LPAREN expression RPAREN statement AWLA statement .)
+
+
+state 119
+
+    (58) for_stmt -> KOULLA LPAREN opt_expr SEMI opt_expr SEMI opt_expr . RPAREN statement
+
+    RPAREN          shift and go to state 120
+
+
+state 120
+
+    (58) for_stmt -> KOULLA LPAREN opt_expr SEMI opt_expr SEMI opt_expr RPAREN . statement
+    (14) statement -> . declaration_stmt
+    (15) statement -> . expression_stmt
+    (16) statement -> . if_stmt
+    (17) statement -> . while_stmt
+    (18) statement -> . for_stmt
+    (19) statement -> . return_stmt
+    (20) statement -> . break_stmt
+    (21) statement -> . continue_stmt
+    (22) statement -> . compound
+    (23) declaration_stmt -> . TYPE ID SEMI
+    (24) declaration_stmt -> . TYPE ID ASSIGN expression SEMI
+    (25) expression_stmt -> . expression SEMI
+    (55) if_stmt -> . ILA LPAREN expression RPAREN statement AWLA statement
+    (56) if_stmt -> . ILA LPAREN expression RPAREN statement
+    (57) while_stmt -> . MNINTCHOUF LPAREN expression RPAREN statement
+    (58) for_stmt -> . KOULLA LPAREN opt_expr SEMI opt_expr SEMI opt_expr RPAREN statement
+    (63) return_stmt -> . RJ3 opt_expr SEMI
+    (61) break_stmt -> . HRASS SEMI
+    (62) continue_stmt -> . KML SEMI
+    (11) compound -> . LBRACE stmt_list RBRACE
+    (26) expression -> . assignment
+    (27) expression -> . binary_expr
+    (28) assignment -> . ID ASSIGN expression
+    (29) binary_expr -> . binary_expr PLUS binary_expr
+    (30) binary_expr -> . binary_expr MINUS binary_expr
+    (31) binary_expr -> . binary_expr TIMES binary_expr
+    (32) binary_expr -> . binary_expr DIVIDE binary_expr
+    (33) binary_expr -> . binary_expr OU binary_expr
+    (34) binary_expr -> . binary_expr AWLA_LOGICAL binary_expr
+    (35) binary_expr -> . binary_expr LT binary_expr
+    (36) binary_expr -> . binary_expr LE binary_expr
+    (37) binary_expr -> . binary_expr GT binary_expr
+    (38) binary_expr -> . binary_expr GE binary_expr
+    (39) binary_expr -> . binary_expr EQ binary_expr
+    (40) binary_expr -> . binary_expr NE binary_expr
+    (41) binary_expr -> . MINUS binary_expr
+    (42) binary_expr -> . MACHI binary_expr
+    (43) binary_expr -> . LPAREN expression RPAREN
+    (44) binary_expr -> . NUMBER
+    (45) binary_expr -> . STRING
+    (46) binary_expr -> . BOOL
+    (47) binary_expr -> . NULL
+    (48) binary_expr -> . ID
+    (49) binary_expr -> . func_call
+    (50) func_call -> . ID LPAREN arg_list RPAREN
+
+    TYPE            shift and go to state 82
+    ILA             shift and go to state 20
+    MNINTCHOUF      shift and go to state 21
+    KOULLA          shift and go to state 22
+    RJ3             shift and go to state 23
+    HRASS           shift and go to state 24
+    KML             shift and go to state 25
+    LBRACE          shift and go to state 26
+    ID              shift and go to state 8
+    MINUS           shift and go to state 29
+    MACHI           shift and go to state 30
+    LPAREN          shift and go to state 9
+    NUMBER          shift and go to state 31
+    STRING          shift and go to state 32
+    BOOL            shift and go to state 33
+    NULL            shift and go to state 34
+
+    statement                      shift and go to state 121
+    declaration_stmt               shift and go to state 11
+    expression_stmt                shift and go to state 12
+    if_stmt                        shift and go to state 13
+    while_stmt                     shift and go to state 14
+    for_stmt                       shift and go to state 15
+    return_stmt                    shift and go to state 16
+    break_stmt                     shift and go to state 17
+    continue_stmt                  shift and go to state 18
+    compound                       shift and go to state 10
+    expression                     shift and go to state 19
+    assignment                     shift and go to state 27
+    binary_expr                    shift and go to state 28
+    func_call                      shift and go to state 35
+
+state 121
+
+    (58) for_stmt -> KOULLA LPAREN opt_expr SEMI opt_expr SEMI opt_expr RPAREN statement .
+
+    TYPE            reduce using rule 58 (for_stmt -> KOULLA LPAREN opt_expr SEMI opt_expr SEMI opt_expr RPAREN statement .)
+    ILA             reduce using rule 58 (for_stmt -> KOULLA LPAREN opt_expr SEMI opt_expr SEMI opt_expr RPAREN statement .)
+    MNINTCHOUF      reduce using rule 58 (for_stmt -> KOULLA LPAREN opt_expr SEMI opt_expr SEMI opt_expr RPAREN statement .)
+    KOULLA          reduce using rule 58 (for_stmt -> KOULLA LPAREN opt_expr SEMI opt_expr SEMI opt_expr RPAREN statement .)
+    RJ3             reduce using rule 58 (for_stmt -> KOULLA LPAREN opt_expr SEMI opt_expr SEMI opt_expr RPAREN statement .)
+    HRASS           reduce using rule 58 (for_stmt -> KOULLA LPAREN opt_expr SEMI opt_expr SEMI opt_expr RPAREN statement .)
+    KML             reduce using rule 58 (for_stmt -> KOULLA LPAREN opt_expr SEMI opt_expr SEMI opt_expr RPAREN statement .)
+    LBRACE          reduce using rule 58 (for_stmt -> KOULLA LPAREN opt_expr SEMI opt_expr SEMI opt_expr RPAREN statement .)
+    ID              reduce using rule 58 (for_stmt -> KOULLA LPAREN opt_expr SEMI opt_expr SEMI opt_expr RPAREN statement .)
+    MINUS           reduce using rule 58 (for_stmt -> KOULLA LPAREN opt_expr SEMI opt_expr SEMI opt_expr RPAREN statement .)
+    MACHI           reduce using rule 58 (for_stmt -> KOULLA LPAREN opt_expr SEMI opt_expr SEMI opt_expr RPAREN statement .)
+    LPAREN          reduce using rule 58 (for_stmt -> KOULLA LPAREN opt_expr SEMI opt_expr SEMI opt_expr RPAREN statement .)
+    NUMBER          reduce using rule 58 (for_stmt -> KOULLA LPAREN opt_expr SEMI opt_expr SEMI opt_expr RPAREN statement .)
+    STRING          reduce using rule 58 (for_stmt -> KOULLA LPAREN opt_expr SEMI opt_expr SEMI opt_expr RPAREN statement .)
+    BOOL            reduce using rule 58 (for_stmt -> KOULLA LPAREN opt_expr SEMI opt_expr SEMI opt_expr RPAREN statement .)
+    NULL            reduce using rule 58 (for_stmt -> KOULLA LPAREN opt_expr SEMI opt_expr SEMI opt_expr RPAREN statement .)
+    $end            reduce using rule 58 (for_stmt -> KOULLA LPAREN opt_expr SEMI opt_expr SEMI opt_expr RPAREN statement .)
+    RBRACE          reduce using rule 58 (for_stmt -> KOULLA LPAREN opt_expr SEMI opt_expr SEMI opt_expr RPAREN statement .)
+    AWLA            reduce using rule 58 (for_stmt -> KOULLA LPAREN opt_expr SEMI opt_expr SEMI opt_expr RPAREN statement .)
+

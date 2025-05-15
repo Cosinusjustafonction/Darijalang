@@ -1,0 +1,10 @@
+int bda() {
+    bool a = bssa7;
+    bool b = machibssa7;
+    ila (a && !b || 1 == 0) {
+        tba3(1);  // Should print 1 if condition is true
+    } awla {
+        tba3(0);  // Should print 0 if condition is false
+    }
+    rj3 0;
+}

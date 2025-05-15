@@ -1,0 +1,213 @@
+## `darija_lexer.py` - DarijaLang Lexical Analyzer
+
+The script `darija_lexer.py` is a lexical analyzer, or lexer, for a custom programming language called "DarijaLang". Its primary function is to take DarijaLang source code as input and break it down into a sequence of "tokens". Tokens are the smallest meaningful units of a programming language, like keywords, identifiers, operators, numbers, and strings. This process is a fundamental first step in compiling or interpreting a programming language.
+
+Here's a breakdown of what the script does:
+
+1.  **Token Definition:**
+    *   It defines a `Token` as a Python class with five fields: `type` (e.g., "TYPE", "ID", "NUMBER", "STRING", "LPAREN"), `value` (the actual text or interpreted value of the token, e.g., "int", "x", 123, "Salam!", "("), `line` (the line number where the token appears), `column` (the starting column number of the token), and `lexpos` (the absolute character offset in the input string).
+
+2.  **Language Specification (Token Types and Keywords):**
+    *   **`tokens` tuple:** This tuple lists all valid token type names that the lexer can produce and that the parser will expect (e.g., `ID`, `NUMBER`, `STRING`, `BOOL`, `NULL`, `TYPE`, `ILA`, `LPAREN`, `PLUS`, `UMINUS`).
+    *   **Keyword Maps:**
+        *   `_TYPE_KEYWORDS`: A set of strings that are recognized as type keywords (e.g., `int`, `float`, `string`, `bool`, `char`, `faragh`). These are tokenized with the type "TYPE".
+        *   `_CONTROL_KEYWORDS_MAP`: A dictionary mapping control flow keyword strings (e.g., `ila`, `awla`, `mnintchouf`) to their corresponding token types (e.g., "ILA", "AWLA", "MNINTCHOUF").
+            * Also includes logical operation keywords: `ou` (AND), `machi` (NOT)
+        *   `_LITERAL_KEYWORDS_MAP`: A dictionary mapping literal keyword strings (e.g., `bssa7`, `machibssa7`, `walou`) to a tuple containing their token type ("BOOL" or "NULL") and their actual boolean or string value.
+            * Boolean literals map to Python values: `bssa7` → `True`, `machibssa7` → `False`
+    *   **Symbol Map (`_SYMBOLS_MAP`):** A dictionary mapping single-character symbols (e.g., `(`, `)`, `{`, `}`, `+`, `-`, `*`, `/`, `=`, `;`, `,`) to their token type names (e.g., "LPAREN", "RPAREN", "PLUS", "ASSIGN", "SEMI").
+    *   **Regex Patterns:** Several regular expressions are defined to identify different types of lexemes:
+        *   `TAG_RE`: Matches HTML-style tags (e.g., `<br>`, `<div>`). This is handled early to avoid misinterpreting `<` and `>` as comparison operators when they are part of a tag.
+        *   `ESC_STRING`: Matches string literals, including those with C-style escaped quotes (e.g., `"Hello"` or `\"Hello\"`). It also handles escape sequences like `\\\"`, `\\\\`, and `\\n` within the string.
+        *   `NUMBER_RE`: Matches integer and floating-point numbers (e.g., `123`, `3.14`).
+        *   `ID_RE`: Matches identifiers (variable names, function names, etc.), which start with a letter or underscore, followed by alphanumeric characters or underscores.
+        *   `WHITESPACE`: Matches spaces, tabs, and carriage returns.
+        *   `COMMENT_RE`: Matches single-line comments starting with `//`.
+
+3.  **Core Lexer Function (`tokenize`):**
+    *   This is the heart of the lexer. It takes the source code string as input and yields `Token` objects one by one.
+    *   It iterates through the input code character by character, keeping track of the current `line` and `column` number.
+    *   **Order of Operations (Precedence):** The lexer tries to match patterns in a specific order:
+        1.  Newlines
+        2.  Whitespace
+        3.  Comments
+        4.  HTML Tags (if a `<` is encountered)
+        5.  Single-character Symbols (using `_SYMBOLS_MAP`)
+        6.  String Literals
+        7.  Number Literals
+        8.  Identifiers/Keywords: Tries to match an identifier using `ID_RE`. If the matched lexeme is found in one of the keyword maps (`_TYPE_KEYWORDS`, `_CONTROL_KEYWORDS_MAP`, `_LITERAL_KEYWORDS_MAP`), it's tokenized with the corresponding type and value; otherwise, it's an "ID".
+    *   **Error Handling:** If none of the above patterns match, it raises a `SyntaxError`.
+
+4.  **PLY Lexer Wrapper (`LexerWrapper`):**
+    *   This class wraps the `tokenize` function to make it compatible with the PLY (Python Lex-Yacc) library.
+    *   It provides an `input()` method to feed source code to the lexer and a `token()` method that PLY's parser will call to get the next token.
+    *   It handles replacing `<br>` tags with newlines in the input data.
+    *   An instance of this wrapper (`lexer`) is created for the parser to use.
+
+5.  **CLI Helper Function (`_read_source`):**
+    *   Gets DarijaLang source code from a file (if a path is provided) or from standard input (interactive mode).
+    *   Replaces `<br>` with `\n` in file content.
+
+6.  **Main Function (`main`):**
+    *   Orchestrates execution for standalone lexer testing.
+    *   Reads source, tokenizes it, and prints each token or any lexer errors.
+
+7.  **Execution (`if __name__ == "__main__":`)**
+    *   Calls `main(sys.argv)` when the script is run directly.
+
+In summary, `darija_lexer.py` reads DarijaLang code, processes it to handle specific cases like HTML tags and escaped strings, and then systematically breaks it down into a stream of tokens. This token stream is made available to PLY-based parsers via the `LexerWrapper`.
+
+## `darija_parser.py` - DarijaLang Parser
+
+The script `darija_parser.py` is a parser for DarijaLang. It uses the PLY (Python Lex-Yacc) library to take the token stream generated by `darija_lexer.py` and transform it into an Abstract Syntax Tree (AST). The AST is a hierarchical tree-like representation of the source code's structure, which is easier for subsequent phases (like code generation or interpretation) to work with.
+
+Here's a breakdown of what the script does:
+
+1.  **Lexer Integration:**
+    *   It imports `darija_lexer` (as `lexmod`) and uses its `tokens` list and `lexer` instance.
+
+2.  **AST Node Definitions:**
+    *   A series of `@dataclass` classes define the structure of the AST nodes (e.g., `Node`, `Program`, `VarDecl`, `ConstLiteral`, `Identifier`, `BinOp`, `UnaryOp`, `Assignment`, `IfStmt`, `WhileStmt`, `ForStmt`, `BreakStmt`, `ContinueStmt`, `ReturnStmt`, `Compound`, `FuncCall`, `FuncDef`). Each node stores relevant information from the source code, including the line number.
+
+3.  **Operator Precedence:**
+    *   A `precedence` tuple is defined to resolve ambiguities in expressions, particularly for arithmetic operators and unary minus (e.g., `UMINUS`). This tells PLY how to group operations (e.g., `*` and `/` before `+` and `-`).
+
+4.  **Grammar Rules (`p_*` functions):**
+    *   A collection of functions, typically named `p_rulename`, define the grammar of DarijaLang. Each function's docstring contains the Backus-Naur Form (BNF) like production rule it implements.
+    *   These rules specify how sequences of tokens form higher-level syntactic structures:
+        *   **Program Structure:** `p_program` defines the top-level `Program` node, which consists of an `external_list`. `p_external_list` and `p_external` handle lists of top-level function definitions or statements.
+        *   **Function Definitions:** `p_function_def` parses function signatures (type, name, parameters) and bodies. `p_param_list_production1`, `p_param_list_production2`, and `p_param_list_nonempty` handle parameter lists.
+        *   **Compound Statements:** `p_compound` parses blocks of code enclosed in `{}`. `p_stmt_list` handles lists of statements within a block.
+        *   **Statements:** `p_statement` is an umbrella rule for various statement types:
+            *   `p_declaration_stmt`: Variable declarations (e.g., `int x;`, `string s = "hi";`).
+            *   `p_expression_stmt`: Expressions used as statements (e.g., `x = 5;`, `myFunc();`).
+            *   `p_if_stmt`: Conditional `ila`/`awla` (if/else) statements.
+            *   `p_while_stmt`: `mnintchouf` (while) loops.
+            *   `p_for_stmt`: `koulla` (for) loops.
+            *   `p_return_stmt`: `rj3` (return) statements.
+            *   `p_break_stmt`: `hrass` (break) statements.
+            *   `p_continue_stmt`: `kml` (continue) statements.
+        *   **Expressions:**
+            *   `p_expression`: Defines expressions as either assignments or binary operations.
+            *   `p_assignment`: Parses assignment operations (e.g., `id = value`).
+            *   `p_binary_expr`: Parses binary arithmetic operations (`+`, `-`, `*`, `/`).
+                * Also handles logical binary operations (`&&`, `||`) and relational operations (`==`, `!=`, `<`, `>`, `<=`, `>=`).
+            *   `p_binary_expr_uminus`: Handles unary minus using precedence.
+            *   `p_binary_expr_machi`: Handles logical NOT (`!`) using the `MACHI` token.
+            *   `p_binary_expr_factor`: Parses basic expression factors like parenthesized expressions, literals (numbers, strings, booleans, null), identifiers, and function calls.
+        *   **Function Calls:** `p_func_call` parses function calls with argument lists. `p_arg_list_production1`, `p_arg_list_production2`, and `p_arg_list_nonempty` handle argument lists.
+        *   **Optional Expressions:** `p_opt_expr` is used in `for` loops and `return` statements for optional expressions.
+        *   **Empty Production:** `p_empty` allows for optional parts in grammar rules (e.g., an empty statement list or an empty argument list).
+    *   When a rule is matched, its corresponding function constructs an AST node using the parsed values and tokens. Line numbers are typically taken from `p.slice[N].line`.
+
+5.  **Error Handling (`p_error`):**
+    *   A `p_error` function is defined to be called by PLY when a syntax error is encountered. It prints an error message including the problematic token's value, line number, and type.
+
+6.  **Parser Construction and Usage:**
+    *   `parser = yacc.yacc(start="program", debug=True)`: This line invokes PLY to build the LALR parsing tables from the defined grammar rules. `debug=True` generates a `parser.out` file for debugging grammar conflicts.
+    *   `parse(src: str) -> Program`: A helper function that resets the lexer's line number and then calls `parser.parse(src, lexer=lexmod.lexer)` to parse the input source string.
+
+7.  **CLI for Quick Testing:**
+    *   The `if __name__ == "__main__":` block allows the script to be run directly.
+    *   It reads DarijaLang code from a file specified as a command-line argument or from standard input.
+    *   It then calls `parse()` to get the AST and prints the resulting AST.
+
+## Logical Operators in DarijaLang
+
+DarijaLang supports the following logical operators:
+
+1. **Logical AND (`&&`)**
+   * Tokenized as 'OU'
+   * Used to combine boolean expressions where both must be true
+   * Example: `bool result = condition1 && condition2;`
+
+2. **Logical OR (`||`)**
+   * Tokenized as 'AWLA_LOGICAL'
+   * Used to combine boolean expressions where at least one must be true
+   * Example: `bool result = condition1 || condition2;`
+
+3. **Logical NOT (`!`)**
+   * Tokenized as 'MACHI'
+   * Used to negate a boolean expression
+   * Example: `bool result = !condition;`
+
+4. **Boolean Literals**
+   * `bssa7` - represents boolean true (tokenized as `True` in Python)
+   * `machibssa7` - represents boolean false (tokenized as `False` in Python)
+
+The parser builds appropriate AST nodes for these operations:
+* Binary logical operators (`&&`, `||`) are represented as `BinOp` nodes
+* Unary NOT (`!`) is represented as `UnaryOp` node
+
+Operator precedence is properly implemented with NOT having the highest precedence, followed by AND, and OR having the lowest precedence among logical operators.
+
+In summary, `darija_parser.py` defines the syntactic structure of DarijaLang and uses PLY to generate a parser that can convert a sequence of tokens from the lexer into a structured AST, reporting syntax errors if the code doesn't conform to the defined grammar.
+
+## `darija_ir.py` - DarijaLang Intermediate Representation
+
+The script `darija_ir.py` generates an Intermediate Representation (IR) from the AST produced by the parser. This IR is a lower-level representation that's closer to the target code, making the code generation process simpler.
+
+Key components of the IR:
+- IR node classes for control flow, operations, and function definitions
+- AST visitor that transforms AST nodes into IR instructions
+- Support for variables, expressions, conditional statements, loops, and function calls
+
+The IR serves as a bridge between the high-level AST and the generated C code, making the compiler more maintainable and extensible.
+
+## Phase 5: Code Generation
+
+### `darija_c_emitter.py` - DarijaLang Code Generator
+
+The script `darija_c_emitter.py` is responsible for transforming the Intermediate Representation (IR) into C source code. This is the final phase of the compilation process, which prepares the code for compilation by a standard C compiler (gcc/clang).
+
+Here's what the code generator does:
+
+1. **C Code Emission**:
+   - Takes an IR program as input and produces valid C code
+   - Handles variable declarations, expressions, control flow, and function calls
+   - Ensures C-safe identifiers that don't clash with C keywords
+   - Generates proper function signatures and bodies
+
+2. **Variable Management**:
+   - Collects and declares all variables at the beginning of functions
+   - Handles IR temporary variables created during expression evaluation
+   - Properly formats different operand types (variables, literals, etc.)
+
+3. **Code Structure**:
+   - Adds necessary runtime header inclusion
+   - Generates a main function stub if one isn't defined in the source
+   - Formats labels and control flow instructions properly for C
+
+4. **Compilation Pipeline**:
+   - Orchestrates the entire compilation process:
+     1. Parsing source to AST
+     2. Generating IR from AST
+     3. Emitting C code from IR
+     4. Compiling the C code with gcc/clang
+     5. Executing the resulting binary
+
+### Runtime Support Files
+
+#### `darija_runtime.h`
+
+The header file defines the runtime support for DarijaLang programs:
+
+- Type definitions for DarijaLang built-in types (`boolDarija`)
+- Constants for boolean literals (`bssa7`, `machibssa7`)
+- Function declarations for I/O operations:
+  - `tba3` - Print an integer value
+  - `tba3_str` - Print a string
+  - `_9rahadi` - Read an integer from stdin
+  - `_darija_exit` - Exit the program with a specified code
+
+#### `darija_runtime.c`
+
+Implements the runtime functions declared in the header:
+
+- I/O functions using C's standard library
+- Error handling for input operations
+- Support for null/nil values in string printing
+
+### Usage
+
+The DarijaLang compiler can now be used to compile and run programs:

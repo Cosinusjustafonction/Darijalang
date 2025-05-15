@@ -1,0 +1,13 @@
+// filepath: c:\Users\SETUP GAME\Desktop\darijaland\logic_test.darija
+int main() {
+    bool a = bssa7 ;
+    bool b = machibssa7;
+    ila (a ou machi b) {
+        tba3("true branch");
+    }
+    awla{
+        tba3("false branch");
+    }
+
+    rj3 0;
+}

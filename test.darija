@@ -1,0 +1,8 @@
+int bda() {
+    int x = 0;
+    mnintchouf (x < 3) {
+        tba3(x);
+        x = x + 1;
+    }
+    rj3 0;
+}

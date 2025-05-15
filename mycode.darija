@@ -1,0 +1,13 @@
+darija;
+int bda() {
+    bool a = bssa7;
+    bool b = machibssa7;
+
+    ila (a && !b) {
+        tba3("true branch");
+    } awla {
+        tba3("false branch");
+    }
+
+    rj3 0;
+}
